@@ -29,7 +29,7 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -52,7 +52,51 @@
 
 	<div class="container">
 
-		@RenderBody()
+
+		<div class="row">
+			@{
+				var hasLeftBar = IsSectionDefined("LeftBar");
+				var hasRightBar = IsSectionDefined("RightBar");
+				var hasBothBars = hasLeftBar && hasRightBar;
+				var hasNoBars = !hasLeftBar && !hasRightBar;
+
+				string bodyWidthClass;
+				// max grid size is 12, side bars are 2.  body fills remaining space, which is 8, 10 or 12 depending on sidebars.
+				if (hasBothBars)
+				{
+					bodyWidthClass = "col-md-8";
+				}
+				else
+				{
+					if (hasNoBars)
+					{
+						bodyWidthClass = "col-md-12";
+					}
+					else
+					{
+						bodyWidthClass = "col-md-10";
+					}
+				}
+			}
+			
+			@if (hasLeftBar)
+			{
+				<div class="col-md-2">
+					@RenderSection("LeftBar")
+				</div>
+			}
+			
+			<div class="@bodyWidthClass">
+				@RenderBody()
+			</div>
+
+			@if (hasRightBar) 
+			{ 
+				<div class="col-md-2">
+					@RenderSection("RightBar")
+				</div>
+			}
+		</div>
 
 	</div><!-- /.container -->
 
