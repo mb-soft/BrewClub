@@ -7,19 +7,24 @@ using AttributeRouting.Web.Mvc;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : ControllerBase
 	{
+
+		public HomeController()
+			: base(GetDefaultUserContext(), GetDefaultSiteSettings())
+		{
+
+		}
+
 		[GET("")]
 		public ActionResult Index()
 		{
 			return View();
 		}
 
-		[GET("about")]
-		public ActionResult About()
+		[GET("contact")]
+		public ActionResult Contact()
 		{
-			ViewBag.Message = "Your application description page.";
-
 			return View();
 		}
 

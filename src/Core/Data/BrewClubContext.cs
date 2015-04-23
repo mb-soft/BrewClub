@@ -1,4 +1,4 @@
-namespace mbsoft.Models
+namespace mbsoft.BrewClub.Data
 {
 	using System;
 	using System.Data.Entity;
