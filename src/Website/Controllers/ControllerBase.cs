@@ -78,7 +78,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 			
 			if (filterContext.HttpContext.IsCustomErrorEnabled)
 			{
-				var exceptionModel = new ErrorModel
+				var exceptionModel = new ViewErrorModel
 				{
 					Url = Request.Url.ToString(),
 					Message = filterContext.Exception.Message,

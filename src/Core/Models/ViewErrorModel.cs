@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Models
 {
-	public class ErrorModel
+	public class ViewErrorModel
 	{
 		public string Url { get; set; }
 
