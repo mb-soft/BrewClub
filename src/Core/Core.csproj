@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Author.cs" />
     <Compile Include="Data\BrewClubContext.cs" />
+    <Compile Include="Data\PostedItem.cs" />
     <Compile Include="Exceptions\LoginRequiredException.cs" />
     <Compile Include="Exceptions\NotAuthorizedException.cs" />
     <Compile Include="Localization\IStringLocalizer.cs" />
