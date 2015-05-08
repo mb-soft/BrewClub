@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Data
 {
-	public class PostedItem
+	public class ClassifiedQuestion
 	{
 
 		public UserProfile Author { get; set; }
 
-		public DateTime DateCreated { get; set; }
-
-		public DateTime? LastEdit { get; set; }
-
-		public string Title { get; set; }
+		public ClassifiedAnswer Answer { get; set; }
 
 	}
 }

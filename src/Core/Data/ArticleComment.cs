@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Data
 {
-	public class Author
+	public class ArticleComment
 	{
 
-		public int AuthorId { get; set; }
+		public UserProfile Author { get; set; }
 
-		public int AuthorName { get; set; }
+		public string Body { get; set; }
 
 	}
 }

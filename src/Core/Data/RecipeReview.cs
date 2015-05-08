@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Data
 {
-	public class PostedItem
+	public class RecipeReview
 	{
 
 		public UserProfile Author { get; set; }
 
-		public DateTime DateCreated { get; set; }
+		public string Comments { get; set; }
+		
+		public bool AuthorBrewedIt { get; set; }
 
-		public DateTime? LastEdit { get; set; }
-
-		public string Title { get; set; }
+		public bool? AuthorLikedIt { get; set; }
+		
 
 	}
 }

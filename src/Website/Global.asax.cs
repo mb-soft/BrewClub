@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+
 namespace mbsoft.BrewClub.Website
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -16,6 +17,7 @@ namespace mbsoft.BrewClub.Website
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
     }
 }
