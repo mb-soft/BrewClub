@@ -11,6 +11,8 @@ namespace mbsoft.BrewClub.Data
 
 		public UserProfile Author { get; set; }
 
+		public string Question { get; set; }
+
 		public ClassifiedAnswer Answer { get; set; }
 
 	}

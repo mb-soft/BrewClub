@@ -14,11 +14,11 @@ namespace mbsoft.BrewClub.Data
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Article>().ToTable("Articles");
+			modelBuilder.Entity<Classified>().ToTable("Classifieds");
+			modelBuilder.Entity<Recipe>().ToTable("Recipes");
 			
 		}
-
-		// public virtual DbSet<MyEntity> MyEntities { get; set; }
-
+		
 
 		public DbSet<PostedItem> PostedItems { get; set; } 
 		public DbSet<Article> Articles { get; set; }

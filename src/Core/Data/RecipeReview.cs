@@ -14,9 +14,7 @@ namespace mbsoft.BrewClub.Data
 		public string Comments { get; set; }
 		
 		public bool AuthorBrewedIt { get; set; }
-
-		public bool? AuthorLikedIt { get; set; }
-		
+			
 
 	}
 }

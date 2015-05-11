@@ -9,5 +9,7 @@ namespace mbsoft.BrewClub.Data
 	public class ClassifiedAnswer
 	{
 		public UserProfile Author { get; set; }
+
+		public string Answer { get; set; }
 	}
 }

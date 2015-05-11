@@ -11,7 +11,7 @@ namespace mbsoft.BrewClub.Data
 
 		public string Description { get; set; }
 
-		// alot more needs to be added here.
+		// a lot more needs to be added here.
 
 		public virtual ICollection<RecipeReview> Reviews { get; set; }
 
