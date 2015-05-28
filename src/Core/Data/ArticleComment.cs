@@ -9,6 +9,8 @@ namespace mbsoft.BrewClub.Data
 	public class ArticleComment
 	{
 
+		public int ArticleCommentId { get; set; }
+
 		public UserProfile Author { get; set; }
 
 		public string Body { get; set; }
