@@ -51,7 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Article.cs" />
+    <Compile Include="Data\ArticleComment.cs" />
     <Compile Include="Data\BrewClubContext.cs" />
+    <Compile Include="Data\BrewClubTestingInitializer.cs" />
+    <Compile Include="Data\Classified.cs" />
+    <Compile Include="Data\ClassifiedAnswer.cs" />
+    <Compile Include="Data\ClassifiedQuestion.cs" />
+    <Compile Include="Data\PostedItem.cs" />
+    <Compile Include="Data\Recipe.cs" />
+    <Compile Include="Data\RecipeReview.cs" />
+    <Compile Include="Data\UserProfile.cs" />
     <Compile Include="Exceptions\LoginRequiredException.cs" />
     <Compile Include="Exceptions\NotAuthorizedException.cs" />
     <Compile Include="Localization\IStringLocalizer.cs" />
