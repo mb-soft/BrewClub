@@ -7,8 +7,8 @@
     <ProjectGuid>{272BBE7A-55EA-49B5-B5F2-5E4F2AF73028}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mbsoft</RootNamespace>
-    <AssemblyName>mbsoft.Core</AssemblyName>
+    <RootNamespace>mbsoft.BrewClub</RootNamespace>
+    <AssemblyName>mbsoft.BrewClub.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="mdryden.Core.Settings">
+      <HintPath>..\..\lib\mdryden.Core.Settings.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -48,15 +51,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BrewClubContext.cs" />
+    <Compile Include="Data\Article.cs" />
+    <Compile Include="Data\ArticleComment.cs" />
+    <Compile Include="Data\BrewClubContext.cs" />
+    <Compile Include="Data\BrewClubTestingInitializer.cs" />
+    <Compile Include="Data\Classified.cs" />
+    <Compile Include="Data\ClassifiedAnswer.cs" />
+    <Compile Include="Data\ClassifiedQuestion.cs" />
+    <Compile Include="Data\PostedItem.cs" />
+    <Compile Include="Data\Recipe.cs" />
+    <Compile Include="Data\RecipeReview.cs" />
+    <Compile Include="Data\UserProfile.cs" />
+    <Compile Include="Exceptions\LoginRequiredException.cs" />
+    <Compile Include="Exceptions\NotAuthorizedException.cs" />
+    <Compile Include="Localization\IStringLocalizer.cs" />
+    <Compile Include="Localization\MissingLocalizedStringException.cs" />
+    <Compile Include="Localization\Xml\Language.cs" />
+    <Compile Include="Localization\Xml\Word.cs" />
+    <Compile Include="Localization\Xml\XmlStringLocalizer.cs" />
+    <Compile Include="Models\ViewErrorModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\UserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
