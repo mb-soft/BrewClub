@@ -10,7 +10,6 @@ using mbsoft.BrewClub.Localization;
 using mbsoft.BrewClub.Localization.Xml;
 using mbsoft.BrewClub.Models;
 using mbsoft.BrewClub.Website;
-using mbsoft.BrewClub.Website;
 using mbsoft.BrewClub.Website.Settings;
 
 namespace mbsoft.BrewClub.Website.Controllers
