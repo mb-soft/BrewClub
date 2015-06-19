@@ -8,7 +8,7 @@
 	
 	<!-- values that probably don't need to be changed: -->
 	<word key="Buy and Sell" value="Buy and Sell" />
-	<word key="Contact Us" value="Contact Us" />
+	<word key="Contact" value="Contact" />
 	<word key="Home" value="Home" />
 	<word key="Login" value="Login" />
 	<word key="Member Posts" value="Member Posts" />
