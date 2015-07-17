@@ -22,11 +22,5 @@ namespace mbsoft.BrewClub.Website.Controllers
 			return View();
 		}
 
-		[GET("contact")]
-		public ActionResult Contact()
-		{
-			return View();
-		}
-
 	}
 }

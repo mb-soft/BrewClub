@@ -10,5 +10,6 @@ namespace mbsoft.BrewClub.Website
 
 		public const string BrewClubName = "BrewClubName";
 		public const string SiteTitleFormat = "SiteTitleFormat";
-	}
+        public const string ContactTitle = "Contact";
+    }
 }
