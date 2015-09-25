@@ -35,28 +35,14 @@
 
 		<div class="row">
 			@{
+				// there will always be a right bar, but left bar is optional
 				var hasLeftBar = IsSectionDefined("LeftBar");
 				var hasRightBar = IsSectionDefined("RightBar");
 				var hasBothBars = hasLeftBar && hasRightBar;
-				var hasNoBars = !hasLeftBar && !hasRightBar;
 
-				string bodyWidthClass;
-				// max grid size is 12, side bars are 2.  body fills remaining space, which is 8, 10 or 12 depending on sidebars.
-				if (hasBothBars)
-				{
-					bodyWidthClass = "col-md-8";
-				}
-				else
-				{
-					if (hasNoBars)
-					{
-						bodyWidthClass = "col-md-12";
-					}
-					else
-					{
-						bodyWidthClass = "col-md-10";
-					}
-				}
+
+				// max grid size is 12, side bars are 2.  body fills remaining space, which is 8, or 10 depending on sidebars.
+				var bodyWidthClass = hasBothBars ? "col-md-8" : "col-md-10";
 			}
 			
 			@if (hasLeftBar)
@@ -70,12 +56,16 @@
 				@RenderBody()
 			</div>
 
-			@if (hasRightBar) 
-			{ 
-				<div class="col-md-2">
+			<div class="col-md-2">
+				@if (hasRightBar)
+				{
 					@RenderSection("RightBar")
-				</div>
-			}
+				}
+				else
+				{
+					@Html.Partial("_RecentActivity")
+				}
+			</div>
 		</div>
 
 	</div><!-- /.container -->

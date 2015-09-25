@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
 using mbsoft.BrewClub.Models;
+using mbsoft.BrewClub.Website.Models.Account;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
@@ -17,13 +18,15 @@ namespace mbsoft.BrewClub.Website.Controllers
 		}
 
 		[GET("login")]
-		public ActionResult Login()
+		public ActionResult Login(string returnUrl)
 		{
-			throw new NotImplementedException();
+			var model = new EditLogin { ReturnUrl = returnUrl };
+
+			return View("Login", model);
 		}
 
 		[POST("login")]
-		public ActionResult Login(LoginModel model, string returnUrl)
+		public ActionResult PostLogin(EditLogin model)
 		{
 			throw new NotImplementedException();
 		}

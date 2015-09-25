@@ -71,7 +71,6 @@
     <Compile Include="Localization\Xml\Word.cs" />
     <Compile Include="Localization\Xml\XmlStringLocalizer.cs" />
     <Compile Include="Models\ViewErrorModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
