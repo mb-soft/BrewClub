@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using mbsoft.BrewClub.Data;
@@ -28,6 +29,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 			this.siteSettings = siteSettings;
 		}
 
+
 		protected static IUserContext GetDefaultUserContext()
 		{
 			return new UserContext();
@@ -41,7 +43,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 		protected override void OnActionExecuted(ActionExecutedContext filterContext)
 		{
 			// ** Supplemental data for views ** //
-			ViewBag.UserState = GetUserState();
+			ViewBag.CurrentUser = GetCurrentUser();
 			ViewBag.Localizer = GetLocalizer();
 			ViewBag.SiteSettings = siteSettings;
 
@@ -53,7 +55,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 			}
 
 			ViewBag.RenderTime = DateTime.Now.Subtract(requestStart);
-			
+
 			base.OnActionExecuted(filterContext);
 		}
 
@@ -74,7 +76,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 				return;
 			}
 
-			
+
 			if (filterContext.HttpContext.IsCustomErrorEnabled)
 			{
 				var exceptionModel = new ViewErrorModel
@@ -101,21 +103,33 @@ namespace mbsoft.BrewClub.Website.Controllers
 
 
 
-		protected BrewClubContext GetContext()
+		protected static BrewClubDbContext GetDbContext()
 		{
-			return new BrewClubContext();
+			return new BrewClubDbContext();
 		}
-		
-		protected void SetUserState(UserState state)
-		{
-			context.SetUserState(state);
-		}
-		
-		protected UserState GetUserState()
-		{
-			var state = context.GetUserState();
 
-			return state ?? UserState.Anonymous;
+		//protected void SetUserState(UserState state)
+		//{
+		//	context.SetUserState(state);
+		//}
+
+		//protected UserState GetUserState()
+		//{
+		//	var state = context.GetUserState();
+
+		//	return state ?? UserState.Anonymous;
+		//}
+
+		protected User GetCurrentUser()
+		{
+			if (User.Identity.IsAuthenticated)
+			{
+				return GetDbContext().Users.First(u => u.UserName == User.Identity.Name);
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		protected SiteLocalizer GetLocalizer()
@@ -135,7 +149,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 		[DebuggerStepThrough]
 		protected void RequireLogin()
 		{
-			if (GetUserState().IsAnonymous)
+			if (GetCurrentUser() != null)
 			{
 				throw new LoginRequiredException();
 			}
@@ -146,12 +160,12 @@ namespace mbsoft.BrewClub.Website.Controllers
 		{
 			RequireLogin();
 
-			if (!GetUserState().IsAdmin)
+			if (GetCurrentUser() != null && GetCurrentUser().IsAdmin)
 			{
 				throw new NotAuthorizedException("You must be an administrator");
 			}
 		}
-		
+
 		protected string GetRequestUrlBase()
 		{
 			return string.Format("{0}://{1}",

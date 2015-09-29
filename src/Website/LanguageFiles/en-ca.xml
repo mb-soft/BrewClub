@@ -9,14 +9,24 @@
 	<!-- values that probably don't need to be changed: -->
 	<word key="Buy and Sell" value="Buy and Sell" />
 	<word key="Contact" value="Contact" />
+	<word key="Display name" value="Display name" />
+	<word key="Email" value="Email" />
+	<word key="Email address" value="Email address" />
+	<word key="Email address is already in use" value="Email address is already in use" />
+	<word key="Forgot password?" value="Forgot password?" />
 	<word key="Home" value="Home" />
-	<word key="Login" value="Login" />
+	<word key="Invalid email or password" value="Invalid email or password" />
+	<word key="Log In" value="Log In" />
+	<word key="Log In / Register" value="Log in or register" />
+	<word key="Logout" value="Logout" />
 	<word key="Member Posts" value="Member Posts" />
+	<word key="Password" value="Password" />
+	<word key="Post" value="Post" />
 	<word key="Recipes" value="Recipes" />
 	<word key="Register" value="Register" />
-	<word key="Toggle navigation" value="Toggle navigation" />
-	<word key="Email" value="Email" />
-	<word key="Password" value="Password" />
 	<word key="Remember me" value="Remember me" />
+	<word key="Toggle navigation" value="Toggle navigation" />
+	<word key="Username" value="Username" />
+	<word key="Username or email" value="Username or email" />
 	
 </language>

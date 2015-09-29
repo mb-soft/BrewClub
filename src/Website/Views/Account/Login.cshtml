@@ -1,32 +1,11 @@
-﻿@model mbsoft.BrewClub.Website.Models.Account.EditLogin
+﻿@model mbsoft.BrewClub.Website.Models.Account.EditLoginRegistration
 
-@{ 
-	PageTitle = Localizer.Localize("Login"); 
+@{
+	PageTitle = Localizer.Localize("Log In");
 }
 
 
-<section>
-	<h2></h2>
+@Html.Partial("_Login", Model.Login)
 
-	<form action="@Url.Action("PostLogin", "Account", new { } )" method="post">
-
-		<div class="input-group">
-			<input type="text" name="email" id="email" class="form-control" placeholder="@Localizer.Localize("Email")" value="@Model.Email" />
-		</div>
-
-		<div class="input-group">
-			<input type="password" name="password" id="password" class="form-control" placeholder="@Localizer.Localize("Password")" />
-		</div>
-
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" name="rememberMe" id="rememberMe" @(Model.RememberMe ? "checked=\"checked\"" : "") />
-				@Localizer.Localize("Remember me")
-			</label>
-		</div>
-
-		<button class="btn btn-default btn-primary" type="submit">@Localizer.Localize("Login")</button>
-
-	</form>
-</section>
+@Html.Partial("_Register", Model.Registration)
 

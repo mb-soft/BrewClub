@@ -1,0 +1,35 @@
+﻿@model mbsoft.BrewClub.Website.Models.Account.EditRegistration
+
+<div class="col-md-6">
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">@Localizer.Localize("Register")</div>
+
+		<div class="panel-body">
+			@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+			{
+				@Html.ValidationSummary(false, null, new { @class = "alert alert-danger form-group" })
+
+				<div class="form-group">
+					@*<label for="email">@Localizer.Localize("Email address")</label>*@
+					@Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = Localizer.Localize("Username") })
+				</div>
+
+				<div class="form-group">
+					@*<label for="email">@Localizer.Localize("Email address")</label>*@
+					@Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", placeholder = Localizer.Localize("Email") })
+				</div>
+
+				<div class="form-group">
+					@*<label for="email">@Localizer.Localize("Email address")</label>*@
+					@Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Localizer.Localize("Password") })
+				</div>
+
+				<button class="btn btn-default btn-success register" type="submit">@Localizer.Localize("Register")</button>
+			}
+		</div>
+
+	</div>
+
+</div>

@@ -12,8 +12,7 @@ namespace mbsoft.BrewClub.Website.Models.Account
 	{
 
 		[Required]
-		[DataType(DataType.EmailAddress)]
-		public string Email { get; set; }
+		public string UsernameEmail { get; set; }
 
 		[Required]
 		[DataType(DataType.Password)]

@@ -71,9 +71,11 @@
 	</div><!-- /.container -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>    
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+	<script src="~/assets/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="~/js/ie10-viewport-bug-workaround.js"></script>
+	@*<script src="~/assets/js/ie10-viewport-bug-workaround.js"></script>*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

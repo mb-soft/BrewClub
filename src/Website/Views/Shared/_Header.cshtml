@@ -14,13 +14,14 @@
 		</div>
 		<div id="navbar1" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				@if (UserState.IsAnonymous)
+				@if (CurrentUser == null)
 				{
-					<li><a href="@Url.Action("Login", "Account")">@Localizer.Localize("Login")</a></li>
-					<li><a href="@Url.Action("Register", "Account")">@Localizer.Localize("Register")</a></li>
+					<li><a href="@Url.Action("LoginRegister", "Account")">@Localizer.Localize("Log In / Register")</a></li>
+					@*<li><a href="@Url.Action("Register", "Account")">@Localizer.Localize("Register")</a></li>*@
 				}
 				else
 				{
+					<li><a href="@Url.Action("ViewProfile", "Account", new { username = CurrentUser.UserName })">@CurrentUser.UserName</a></li>
 					<li><a href="#">@Localizer.Localize("Post")</a></li>
 					<li><a href="@Url.Action("Logout", "Account")">@Localizer.Localize("Logout")</a></li>
 				}

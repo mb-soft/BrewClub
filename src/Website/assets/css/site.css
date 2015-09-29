@@ -1,2 +1,52 @@
-﻿
+﻿.validation-summary-valid
+{
+	display: none;
+}
 
+.validation-summary-errors ul
+{
+	padding-left: 0;
+}
+
+.validation-summary-errors li
+{
+	list-style: none;
+}
+
+.field-validation-valid
+{
+	display: none;
+}
+
+.flex-table
+{
+	width: 100%;
+}
+
+.flex-table-primary,
+.flex-table-secondary
+{
+	vertical-align: top;
+}
+
+.flex-table-primary
+{
+	padding-right: 5px;
+	width: 99%;
+}
+
+.flex-table-secondary
+{
+	max-width: 1%;
+	width: 1%;
+}
+
+.remember
+{
+	color: #999;
+}
+
+.btn.register
+{
+	float: right;
+}

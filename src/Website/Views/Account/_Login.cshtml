@@ -1,0 +1,42 @@
+﻿@model mbsoft.BrewClub.Website.Models.Account.EditLogin
+<div class="col-md-6">
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">@Localizer.Localize("Log In")</div>
+
+		<div class="panel-body">
+			@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+			{
+				@Html.ValidationSummary(false, null, new { @class = "alert alert-danger form-group" })
+
+				<div class="form-group">
+					@*<label for="email">@Localizer.Localize("Email address")</label>*@
+					@Html.TextBoxFor(m => m.UsernameEmail, new { @class = "form-control", placeholder = Localizer.Localize("Username or email") })
+				</div>
+
+				<table class="flex-table form-group password-signin">
+					<tbody>
+						<tr>
+							<td class="flex-table-primary">
+								@Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Localizer.Localize("Password") })
+							</td>
+							<td class="flex-table-secondary">
+								<button class="btn btn-default btn-primary" type="submit">@Localizer.Localize("Log In")</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="checkbox remember-forgot">
+					<label>
+						<input type="checkbox" name="rememberMe" id="rememberMe" @(Model.RememberMe ? "checked=\"checked\"" : "") />
+						<span class="remember">@Localizer.Localize("Remember me")</span>
+						<span class="separator">·</span>
+						@Html.ActionLink(Localizer.Localize("Forgot password?"), "Forgot", "Account")
+					</label>
+				</div>
+			}
+		</div>
+	</div>
+</div>
