@@ -26,5 +26,16 @@ namespace mbsoft.BrewClub.Data
 
 			return userManager;
 		}
+
+		public IdentityResult Create(string username, string email, string password)
+		{
+			var newUser = new User
+			{
+				UserName = username,
+				Email = email,
+			};
+
+			return this.Create(newUser, password);
+		}
 	}
 }

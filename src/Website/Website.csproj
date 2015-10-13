@@ -167,12 +167,13 @@
     <Compile Include="Core\LocalizedStringKeys.cs" />
     <Compile Include="Core\SiteLocalizer.cs" />
     <Compile Include="Core\UserContext.cs" />
+    <Compile Include="Core\UserRetriever.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account\EditLogin.cs" />
-    <Compile Include="Models\Account\EditLoginRegistration.cs" />
-    <Compile Include="Models\Account\EditRegistration.cs" />
+    <Compile Include="Models\Account\SubmitLogin.cs" />
+    <Compile Include="Models\Account\SubmitLoginRegistration.cs" />
+    <Compile Include="Models\Account\SubmitRegistration.cs" />
     <Compile Include="Models\Home\ViewIndex.cs" />
     <Compile Include="Models\Shared\ViewActivitySummary.cs" />
     <Compile Include="Models\Shared\ViewArticleSummary.cs" />

@@ -9,10 +9,25 @@ namespace mbsoft.BrewClub.Data
 	public static class BrewClubRoleManager
 	{
 
-		public static string Admin = "Admin"; // has rights to all functions
-		public static string Moderator = "Moderator"; // has rights to moderation functions
-		public static string Member = "Member"; // allowed to post content
-		public static string User = "User"; // allowed to comment on comment and maintain a profile
+		/// <summary>
+		/// Has rights to all functions
+		/// </summary>
+		public static string Admin = "Admin"; // 
+
+		/// <summary>
+		/// Has rights to moderation functions
+		/// </summary>
+		public static string Moderator = "Moderator";
+
+		/// <summary>
+		/// Allowed to post content
+		/// </summary>
+		public static string Member = "Member";
+
+		/// <summary>
+		/// Allowed to comment on articles and maintain a profile
+		/// </summary>
+		public static string User = "User"; 
 
 	}
 }

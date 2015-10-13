@@ -8,13 +8,13 @@ using System.Web.Mvc;
 
 namespace mbsoft.BrewClub.Website.Models.Account
 {
-	public class EditLogin
+	public class SubmitLogin
 	{
 
-		[Required]
+		[Required(ErrorMessage = "Username or email is required.")]
 		public string UsernameEmail { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Password field is required.")]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 

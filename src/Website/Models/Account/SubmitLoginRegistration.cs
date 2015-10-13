@@ -5,10 +5,10 @@ using System.Web;
 
 namespace mbsoft.BrewClub.Website.Models.Account
 {
-	public class EditLoginRegistration
+	public class SubmitLoginRegistration
 	{
-		public EditLogin Login { get; set; }
+		public SubmitLogin Login { get; set; }
 
-		public EditRegistration Registration { get; set; }
+		public SubmitRegistration Registration { get; set; }
 	}
 }

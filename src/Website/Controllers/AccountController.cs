@@ -57,16 +57,16 @@ namespace mbsoft.BrewClub.Website.Controllers
 		[GET("login")]
 		public ActionResult LoginRegister(string returnUrl)
 		{
-			var login = new EditLogin { ReturnUrl = returnUrl };
-			var registration = new EditRegistration();
+			var login = new SubmitLogin { ReturnUrl = returnUrl };
+			var registration = new SubmitRegistration();
 
-			var model = new EditLoginRegistration { Login = login, Registration = registration };
+			var model = new SubmitLoginRegistration { Login = login, Registration = registration };
 
 			return View("Login", model);
 		}
 
 		[POST("login")]
-		public ActionResult Login(EditLogin model)
+		public ActionResult Login(SubmitLogin model)
 		{
 
 			if (!ModelState.IsValid)
@@ -74,24 +74,11 @@ namespace mbsoft.BrewClub.Website.Controllers
 				return View("_Login", model);
 			}
 			
-			var isEmailAddress = model.UsernameEmail.Contains("@");
+			var retriever = new UserRetriever(userManager);
 
-			User authenticatedUser = null;
-
-			if (isEmailAddress)
-			{
-				var userByEmail = userManager.FindByEmail(model.UsernameEmail);
-				if (userByEmail != null)
-				{
-					authenticatedUser = userManager.Find(userByEmail.UserName, model.Password);
-				}
-			}
-			else
-			{
-				authenticatedUser = userManager.Find(model.UsernameEmail, model.Password);
-			}
+			User authenticatedUser;
 			
-			if (authenticatedUser == null)
+			if (!retriever.TryGetAuthenticatedUser(model.UsernameEmail, model.Password, out authenticatedUser))
 			{
 				ModelState.AddModelError("", GetLocalizer().Localize("Invalid email or password"));
 				return View("_Login", model);
@@ -101,9 +88,6 @@ namespace mbsoft.BrewClub.Website.Controllers
 			var identity = userManager.CreateIdentity(authenticatedUser, SiteSettings.GetInstance().AuthenticationType);
 
 			GetAuthorizationManager().SignIn(identity);
-			
-			//var state = UserState.Create(foundUser);
-			//SetUserState(state);
 
 			return Redirect(GetRedirectUrl(model.ReturnUrl));
 		}
@@ -117,7 +101,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 		}
 
 		[POST("register")]
-		public ActionResult Register(EditRegistration model)
+		public ActionResult Register(SubmitRegistration model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -140,15 +124,9 @@ namespace mbsoft.BrewClub.Website.Controllers
 				return View("_Register", model);
 			}
 
-			var newUser = new User
-			{
-				UserName = model.UserName,
-				Email = model.EmailAddress,
-			};
+			userManager.Create(model.UserName, model.EmailAddress, model.Password);
 
-			userManager.Create(newUser, model.Password);
-
-			var login = new EditLogin { UsernameEmail = model.EmailAddress, Password = model.Password };
+			var login = new SubmitLogin { UsernameEmail = model.EmailAddress, Password = model.Password };
 
 			return Login(login);
 		}

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using mbsoft.BrewClub.Data;
+using mbsoft.BrewClub.Website.Settings;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -19,7 +20,7 @@ namespace mbsoft.BrewClub.Website
 		{
 			app.UseCookieAuthentication(new CookieAuthenticationOptions
 			{
-				AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+				AuthenticationType = SiteSettings.GetInstance().AuthenticationType,
 				Provider = new CookieAuthenticationProvider { OnApplyRedirect = ApplyLoginRedirect }
 			});			
 		}

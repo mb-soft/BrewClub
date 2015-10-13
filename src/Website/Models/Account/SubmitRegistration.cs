@@ -7,16 +7,16 @@ using mbsoft.BrewClub.Data;
 
 namespace mbsoft.BrewClub.Website.Models.Account
 {
-	public class EditRegistration
+	public class SubmitRegistration
 	{
 		
-		[Required]
+		[Required(ErrorMessage = "Username is required.")]
 		public string UserName { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Email address is required.")]
 		public string EmailAddress { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Password is required.")]
 		public string Password { get; set; }
 	}
 }
