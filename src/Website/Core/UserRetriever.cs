@@ -20,24 +20,23 @@ namespace mbsoft.BrewClub.Website
 		public bool TryGetAuthenticatedUser(string usernameEmail, string password, out User user)
 		{
 			var isEmailAddress = usernameEmail.Contains("@");
-			
+
+			user = null;
+
 			if (isEmailAddress)
 			{
 				var userByEmail = userManager.FindByEmail(usernameEmail);
 				if (userByEmail != null)
 				{
 					user = userManager.Find(userByEmail.UserName, password);
-					return true;
 				}
 			}
 			else
 			{
 				user = userManager.Find(usernameEmail, password);
-				return true;
 			}
 
-			user = null;
-			return false;
+			return user != null;
 		}
 
 	}
