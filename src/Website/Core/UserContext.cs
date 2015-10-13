@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using mbsoft.BrewClub.Data;
 using mbsoft.BrewClub.Models;
 
 namespace mbsoft.BrewClub.Website
@@ -11,14 +12,14 @@ namespace mbsoft.BrewClub.Website
 
 		const string UserStateSessionKey = "UserState";
 
-		public void SetUserState(UserState state)
+		public void SetUserState(User state)
 		{
 			HttpContext.Current.Session[UserStateSessionKey] = state;
 		}
 
-		public UserState GetUserState()
+		public User GetUserState()
 		{
-			return (UserState)HttpContext.Current.Session[UserStateSessionKey];
+			return (User)HttpContext.Current.Session[UserStateSessionKey];
 		}
 	}
 }

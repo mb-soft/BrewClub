@@ -40,6 +40,14 @@
     <Reference Include="mdryden.Core.Settings">
       <HintPath>..\..\lib\mdryden.Core.Settings.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,15 +62,17 @@
   <ItemGroup>
     <Compile Include="Data\Article.cs" />
     <Compile Include="Data\ArticleComment.cs" />
-    <Compile Include="Data\BrewClubContext.cs" />
+    <Compile Include="Data\BrewClubDbContext.cs" />
     <Compile Include="Data\BrewClubTestingInitializer.cs" />
+    <Compile Include="Data\BrewClubUserManager.cs" />
     <Compile Include="Data\Classified.cs" />
     <Compile Include="Data\ClassifiedAnswer.cs" />
     <Compile Include="Data\ClassifiedQuestion.cs" />
     <Compile Include="Data\PostedItem.cs" />
     <Compile Include="Data\Recipe.cs" />
     <Compile Include="Data\RecipeReview.cs" />
-    <Compile Include="Data\UserProfile.cs" />
+    <Compile Include="Data\BrewClubRoleManager.cs" />
+    <Compile Include="Data\User.cs" />
     <Compile Include="Exceptions\LoginRequiredException.cs" />
     <Compile Include="Exceptions\NotAuthorizedException.cs" />
     <Compile Include="Localization\IStringLocalizer.cs" />
@@ -71,8 +81,6 @@
     <Compile Include="Localization\Xml\Word.cs" />
     <Compile Include="Localization\Xml\XmlStringLocalizer.cs" />
     <Compile Include="Models\ViewErrorModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\UserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

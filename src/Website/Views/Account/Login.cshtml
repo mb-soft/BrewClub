@@ -1,0 +1,11 @@
+﻿@model mbsoft.BrewClub.Website.Models.Account.SubmitLoginRegistration
+
+@{
+	PageTitle = Localizer.Localize("Log In");
+}
+
+
+@Html.Partial("_Login", Model.Login)
+
+@Html.Partial("_Register", Model.Registration)
+

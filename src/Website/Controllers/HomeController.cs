@@ -15,7 +15,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 		{
 
 		}
-
+		
 		[GET("")]
 		public ActionResult Index()
 		{

@@ -6,7 +6,7 @@ using mbsoft.BrewClub.Localization;
 
 namespace mbsoft.BrewClub.Website
 {
-	public class SiteLocalizer
+	public class SiteLocalizer 
 	{
 
 		private IStringLocalizer underlyingLocalizer;

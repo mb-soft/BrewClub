@@ -10,7 +10,7 @@ namespace mbsoft.BrewClub.Data
 	{
 		public int RecipeReviewId { get; set; }
 
-		public UserProfile Author { get; set; }
+		public User Author { get; set; }
 
 		public string Comments { get; set; }
 		
