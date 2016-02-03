@@ -19,5 +19,9 @@ namespace mbsoft.BrewClub.Data
 
 		public string Title { get; set; }
 
+        public DateTime GetLastActivity()
+        {
+            return (this.LastEdit.HasValue == true) ? this.LastEdit.Value : this.DateCreated;
+        }
 	}
 }
