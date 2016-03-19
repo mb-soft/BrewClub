@@ -28,6 +28,12 @@ namespace mbsoft.BrewClub.Website.Controllers
 			this.siteSettings = siteSettings;
 		}
 
+        //TODO throw this out once we figure out how the users are going to work.
+        protected UserProfile GetDummyUser()
+        {
+            return GetContext().UserProfiles.First();
+        }
+
 		protected static IUserContext GetDefaultUserContext()
 		{
 			return new UserContext();
@@ -118,14 +124,9 @@ namespace mbsoft.BrewClub.Website.Controllers
 			return state ?? UserState.Anonymous;
 		}
 
-		protected SiteLocalizer GetLocalizer()
+		protected ISiteLocalizer GetLocalizer()
 		{
-			// todo: tie this to a cache dependency to avoid unnecessary reloads, but still get updated when the file changes.
-			var underlyingLocalizer = XmlStringLocalizer.Create(siteSettings.Language.BaseCultureCode, siteSettings.Language.LanguageFilesDirectory);
-
-			var localizer = new SiteLocalizer(siteSettings.Language.BaseCultureCode, underlyingLocalizer);
-
-			return localizer;
+            return new SiteLocalizerFactory().GetXmlStringSiteLocalizer(siteSettings.Language.BaseCultureCode, siteSettings.Language.LanguageFilesDirectory);
 		}
 
 		private void ReturnString(string s, int i)

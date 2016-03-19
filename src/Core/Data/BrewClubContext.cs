@@ -16,7 +16,7 @@ namespace mbsoft.BrewClub.Data
 			modelBuilder.Entity<Article>().ToTable("Articles");
 			modelBuilder.Entity<Classified>().ToTable("Classifieds");
 			modelBuilder.Entity<Recipe>().ToTable("Recipes");
-			
+            modelBuilder.Entity<UserProfile>().ToTable("UserProfiles");			
 		}
 		
 
@@ -24,7 +24,8 @@ namespace mbsoft.BrewClub.Data
 		public DbSet<Article> Articles { get; set; }
 		public DbSet<Classified> Classifieds { get; set; }
 		public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
-	}
+    }
 
 }

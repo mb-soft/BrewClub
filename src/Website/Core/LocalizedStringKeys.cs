@@ -12,5 +12,11 @@ namespace mbsoft.BrewClub.Website
 		public const string SiteTitleFormat = "SiteTitleFormat";
         public const string ContactTitle = "Contact";
         public const string ArticlesTitle = "Member Posts";
+
+        public const string ArticleTitleLabel = "ArticleTitleLabel";
+        public const string ArticleBodyLabel = "ArticleBodyLabel";
+        public const string ArticleDateCreatedLabel = "ArticleDateCreatedLabel";
+        public const string ArticleDateLastEditedLabel = "ArticleDateLastEditedLabel";
+        public const string ArticleCommentsLabel = "ArticleCommentsLabel";
     }
 }

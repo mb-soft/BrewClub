@@ -1,4 +1,21 @@
-﻿@{
+﻿@model mbsoft.BrewClub.Website.Models.Articles.ArticlesViewModel
+
+@using mbsoft.BrewClub.Website.Controllers;
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     PageTitle = LocalizedStringKeys.ArticlesTitle;
 }
+
+<div>
+    @Html.ActionLink("Create a new post...", "create");
+</div>
+
+<ul>
+    @foreach (var article in Model.ArticleListItems)
+    {
+        var formattedLinkText = string.Format("{0} {1} {2} {3}", article.Title, article.AuthorName, article.LastActivity.ToString(), article.CommentCount.ToString());
+        <li>@Html.ActionLink(formattedLinkText, "details", new { articleID = article.ArticleId })</li>
+    }
+
+</ul>

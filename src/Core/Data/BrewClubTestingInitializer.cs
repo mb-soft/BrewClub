@@ -16,9 +16,12 @@ namespace mbsoft.BrewClub.Data
 
 			var mikesProfile = new UserProfile
 			{
-				UserId = 1,
-
+				UserProfileId = 1,
+                DisplayName = "Mike",
+                Email = "mike@Mike.com",
 			};
+
+            context.UserProfiles.Add(mikesProfile);
 
 			var articles = new List<Article>
 			{

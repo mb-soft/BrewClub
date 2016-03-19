@@ -4,7 +4,7 @@
 	<!-- values that should be customized: -->
 	<word key="BrewClubName" value="Westman Alers" />
 	<word key="SiteTitleFormat" value="Westman Alers - {0}" />
-	
+  	
 	
 	<!-- values that probably don't need to be changed: -->
 	<word key="Buy and Sell" value="Buy and Sell" />
@@ -15,5 +15,11 @@
 	<word key="Recipes" value="Recipes" />
 	<word key="Register" value="Register" />
 	<word key="Toggle navigation" value="Toggle navigation" />
-	
+
+  <word key="ArticleTitleLabel" value="Title" />
+  <word key="ArticleBodyLabel" value="Body" />
+  <word key="ArticleDateCreatedLabel" value="Posted" />
+  <word key="ArticleDateLastEditedLabel" value="Edited" />
+  <word key="ArticleCommentsLabel" value="Comments" />        
+  
 </language>

@@ -1,0 +1,49 @@
+﻿@model mbsoft.BrewClub.Website.Models.Articles.ArticleDetailsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    PageTitle = LocalizedStringKeys.ArticlesTitle;
+}
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateLastEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateLastEdited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArticleID }) |
+    @Html.ActionLink("Back to List", "")
+</p>
