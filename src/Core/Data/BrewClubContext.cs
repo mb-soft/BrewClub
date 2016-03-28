@@ -5,7 +5,7 @@ namespace mbsoft.BrewClub.Data
 	using System.Linq;
 
 	public class BrewClubContext : DbContext
-	{
+    {
 		public BrewClubContext()
 			: base("name=BrewClubContext")
 		{

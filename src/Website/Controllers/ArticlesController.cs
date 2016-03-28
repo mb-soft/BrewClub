@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using mbsoft.BrewClub.Data;
 using mbsoft.BrewClub.Website.Models.Articles;
+using mbsoft.BrewClub.Website.Settings;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
@@ -17,8 +18,8 @@ namespace mbsoft.BrewClub.Website.Controllers
     {
         private IArticleViewModelConverter articleModelConverter;
 
-        public ArticlesController(IArticleViewModelConverter articleModelConverter)
-			: base(GetDefaultUserContext(), GetDefaultSiteSettings())
+        public ArticlesController(BrewClubContext dataContext, IUserContext context, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter)
+			: base(dataContext, context, siteSettings)
 		{
             this.articleModelConverter = articleModelConverter;
         }
@@ -26,7 +27,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         [Route("")]
         public ActionResult Articles()
         {
-            var model = articleModelConverter.ConvertToArticlesViewModel(GetContext().Articles);
+            var model = articleModelConverter.ConvertToArticlesViewModel(dataContext.Articles);
             return View(model);
         }
         
@@ -45,11 +46,10 @@ namespace mbsoft.BrewClub.Website.Controllers
                 var user = GetDummyUser();
 
                 var convertedDataArticle = articleModelConverter.ConvertArticleCreateViewModelToDataArticle(article, user, DateTime.Now);
-                var dbContext = GetContext();
-                dbContext.Articles.Add(convertedDataArticle);
-                dbContext.SaveChanges();
+                dataContext.Articles.Add(convertedDataArticle);
+                dataContext.SaveChanges();
 
-                return RedirectToAction("details", new { articleID = convertedDataArticle.PostedItemId });
+                return RedirectToAction("details", new { articleID = convertedDataArticle.PostedItemID });
             }
             else
             {
@@ -61,7 +61,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         [Route("details/{articleID:int}")]
         public ActionResult Details(int articleID)
         {
-            var article = GetContext().Articles.Find(articleID);
+            var article = dataContext.Articles.Find(articleID);
             if (article == null)
             {
                 return HttpNotFound();
@@ -71,6 +71,33 @@ namespace mbsoft.BrewClub.Website.Controllers
                 var model = articleModelConverter.ConvertToArticleDetailsViewModel(article);
                 return View(model);
             }            
+        }
+
+        [HttpGet]
+        public ActionResult CreateComment(int articleID)
+        {
+            var model = new CreateCommentViewModel() { ArticleID = articleID };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment(CreateCommentViewModel comment)
+        {
+            if (ModelState.IsValid == true)
+            {
+                var user = GetDummyUser();
+
+                var convertedDataArticleComment = articleModelConverter.ConvertCreateCommentViewModelToDataArticle(comment, user, DateTime.Now);
+                dataContext.Articles.Find(comment.ArticleID).Comments.Add(convertedDataArticleComment);
+                dataContext.SaveChanges();
+
+                return RedirectToAction("details", new { articleID = comment.ArticleID });
+            }
+            else
+            {
+                return View(comment);
+            }
         }
 
     }

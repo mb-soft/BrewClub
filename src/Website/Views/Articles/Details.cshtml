@@ -2,48 +2,43 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    PageTitle = LocalizedStringKeys.ArticlesTitle;
+    PageTitle = Localizer.Localize(LocalizedStringKeys.ArticlesTitle);
 }
 
 <div>
-    <h4>Article</h4>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.DateCreated)</dt>
+        <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
+        <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateLastEdited)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.DateLastEdited)</dt>
+        <dd>@Html.DisplayFor(model => model.DateLastEdited)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateLastEdited)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Body)</dt>
+        <dd>@Html.DisplayFor(model => model.Body)</dd>
     </dl>
+    @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText), "edit", new { id = Model.ArticleID })
+
+    <h5>@Html.DisplayNameFor(model => model.Comments)</h5>
+    @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleCreateCommentLinkText), "CreateComment", new { articleID = Model.ArticleID })
+
+    <div class="articleCommentsList">
+        <dl class="dl-horizontal">
+            @foreach (var comment in Model.Comments)
+            {
+                <dt>@Html.DisplayNameFor(model => comment.AuthorName)</dt>
+                <dd>@Html.DisplayFor(model => comment.AuthorName)</dd>
+
+                <dt>@Html.DisplayNameFor(model => comment.DateCreated)</dt>
+                <dd>@Html.DisplayFor(model => comment.DateCreated)</dd>
+
+                <dt>@Html.DisplayNameFor(model => comment.Body)</dt>
+                <dd>@Html.DisplayFor(model => comment.Body)</dd>
+            }
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ArticleID }) |
-    @Html.ActionLink("Back to List", "")
-</p>

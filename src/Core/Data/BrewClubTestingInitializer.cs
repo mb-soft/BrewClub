@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Data
 {
-	public class BrewClubTestingInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<BrewClubContext>
+	public class BrewClubTestingInitializer : System.Data.Entity.DropCreateDatabaseAlways<BrewClubContext>
 	{
 
 		protected override void Seed(BrewClubContext context)
@@ -16,21 +16,26 @@ namespace mbsoft.BrewClub.Data
 
 			var mikesProfile = new UserProfile
 			{
-				UserProfileId = 1,
+				UserProfileID = 1,
                 DisplayName = "Mike",
                 Email = "mike@Mike.com",
 			};
 
             context.UserProfiles.Add(mikesProfile);
 
-			var articles = new List<Article>
-			{
-				new Article { Author = mikesProfile, Body = "This is a test article", DateCreated = DateTime.Now, Title = "The first test" },
+            var articleComments = new List<ArticleComment>
+            {
+                new ArticleComment { ArticleCommentID = 1, Author = mikesProfile, Body = "killer post man", DateCreated = DateTime.Now },
+                new ArticleComment { ArticleCommentID = 2, Author = mikesProfile, Body = "pretty weak dude", DateCreated = DateTime.Now }
+            };
+
+            var articles = new List<Article>
+            {
+                new Article { Author = mikesProfile, Body = "This is a test article", DateCreated = DateTime.Now, Title = "The first test", Comments = articleComments },
 			};
 
 			articles.ForEach(a => context.Articles.Add(a));
 			context.SaveChanges();
-
 
 		}
 

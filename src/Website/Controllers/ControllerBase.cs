@@ -18,31 +18,25 @@ namespace mbsoft.BrewClub.Website.Controllers
 	{
 
 		private DateTime requestStart;
-		private IUserContext context;
-		private ISiteSettings siteSettings;
+        protected BrewClubContext dataContext { get; }
+        protected IUserContext userContext { get;  }
+        protected ISiteSettings siteSettings { get; }
 
-		public ControllerBase(IUserContext context, ISiteSettings siteSettings)
+
+		public ControllerBase(BrewClubContext dataContext, IUserContext context, ISiteSettings siteSettings)
 		{
 			requestStart = DateTime.Now;
-			this.context = context;
+            this.dataContext = dataContext;
+			this.userContext = context;
 			this.siteSettings = siteSettings;
 		}
 
         //TODO throw this out once we figure out how the users are going to work.
         protected UserProfile GetDummyUser()
         {
-            return GetContext().UserProfiles.First();
+            return dataContext.UserProfiles.First();
         }
 
-		protected static IUserContext GetDefaultUserContext()
-		{
-			return new UserContext();
-		}
-
-		protected static ISiteSettings GetDefaultSiteSettings()
-		{
-			return SiteSettings.GetInstance();
-		}
 
 		protected override void OnActionExecuted(ActionExecutedContext filterContext)
 		{
@@ -105,21 +99,15 @@ namespace mbsoft.BrewClub.Website.Controllers
 			}
 		}
 
-
-
-		protected BrewClubContext GetContext()
-		{
-			return new BrewClubContext();
-		}
 		
 		protected void SetUserState(UserState state)
 		{
-			context.SetUserState(state);
+			userContext.SetUserState(state);
 		}
 		
 		protected UserState GetUserState()
 		{
-			var state = context.GetUserState();
+			var state = userContext.GetUserState();
 
 			return state ?? UserState.Anonymous;
 		}

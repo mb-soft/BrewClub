@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,17 @@ namespace mbsoft.BrewClub.Data
 	public class ArticleComment
 	{
 
-		public int ArticleCommentId { get; set; }
+		public int ArticleCommentID { get; set; }
 
-		public UserProfile Author { get; set; }
+        public int PostedItemID { get; set; }
 
-		public string Body { get; set; }
+        [Required]
+        public virtual UserProfile Author { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
+        [Required]
+        public string Body { get; set; }
 
 	}
 }

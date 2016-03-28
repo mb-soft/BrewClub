@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,15 +10,17 @@ namespace mbsoft.BrewClub.Data
 	public class PostedItem
 	{
 
-		public int PostedItemId { get; set; }
+		public int PostedItemID { get; set; }
 
-		public virtual UserProfile Author { get; set; }
+        [Required]
+        public virtual UserProfile Author { get; set; }
 
-		public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
 
 		public DateTime? LastEdit { get; set; }
 
-		public string Title { get; set; }
+        [Required]
+        public string Title { get; set; }
 
         public DateTime GetLastActivity()
         {

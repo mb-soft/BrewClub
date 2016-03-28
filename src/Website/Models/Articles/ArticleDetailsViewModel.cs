@@ -9,6 +9,9 @@ namespace mbsoft.BrewClub.Website.Models.Articles
     {
         public int ArticleID { get; set; }
 
+        [LocalizedDisplayName(LocalizedStringKeys.ArticleAuthorNameLabel)]
+        public string AuthorName { get; set; }
+
         [LocalizedDisplayName(LocalizedStringKeys.ArticleTitleLabel)]
         public string Title { get; set; }
 
@@ -23,6 +26,6 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         public DateTime? DateLastEdited { get; set; }
 
         [LocalizedDisplayName(LocalizedStringKeys.ArticleCommentsLabel)]
-        public ICollection<ArticleComment> Comments { get; set; } = new List<ArticleComment>();
-}
+        public ICollection<ArticleDetailsViewModelComment> Comments { get; set; } = new List<ArticleDetailsViewModelComment>();
+    }
 }

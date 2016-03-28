@@ -11,7 +11,7 @@ namespace mbsoft.BrewClub.Data
 	public class UserProfile
 	{
 		// I don't yet understand how membership and entity framework are supposed to integrate.
-		public int UserProfileId { get; set; }
+		public int UserProfileID { get; set; }
 
 		public string DisplayName { get; set; }
 

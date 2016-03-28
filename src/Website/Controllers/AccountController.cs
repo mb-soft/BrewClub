@@ -10,8 +10,8 @@ namespace mbsoft.BrewClub.Website.Controllers
 {
 	public class AccountController : ControllerBase
 	{
-		public AccountController()
-			: base(GetDefaultUserContext(), GetDefaultSiteSettings())
+		public AccountController(Data.BrewClubContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
+			: base(dataContext, context, siteSettings)
 		{
 
 		}

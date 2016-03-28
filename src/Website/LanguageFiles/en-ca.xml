@@ -11,7 +11,7 @@
 	<word key="Contact" value="Contact" />
 	<word key="Home" value="Home" />
 	<word key="Login" value="Login" />
-	<word key="Member Posts" value="Member Posts" />
+	<word key="ArticlesTitle" value="Member Posts" />
 	<word key="Recipes" value="Recipes" />
 	<word key="Register" value="Register" />
 	<word key="Toggle navigation" value="Toggle navigation" />
@@ -20,6 +20,16 @@
   <word key="ArticleBodyLabel" value="Body" />
   <word key="ArticleDateCreatedLabel" value="Posted" />
   <word key="ArticleDateLastEditedLabel" value="Edited" />
-  <word key="ArticleCommentsLabel" value="Comments" />        
+  <word key="ArticleCommentsLabel" value="Comments" />  
+  <word key="ArticleAuthorNameLabel" value="Posted By" />   
+  <word key="ArticleEditLinkText" value="Edit Article" />
+  <word key="ArticleCreateNewArticleHeader" value="New Post" />
+  <word key="ArticleCreateCommentLinkText" value="Add Comment" />
+  
+  <word key="ArticleCreateNewCommentHeader" value="Create Comment" />
+  <word key="ArticleCommentAuthorNameLabel" value="User" />
+  <word key="ArticleCommentBodyLabel" value="Comment" />
+  <word key="ArticleCommentDateCreatedLabel" value="Date" />
+  
   
 </language>

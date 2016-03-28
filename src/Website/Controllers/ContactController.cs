@@ -7,16 +7,15 @@ using AttributeRouting.Web.Mvc;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
+    [RoutePrefix("contact")]
     public class ContactController : ControllerBase
     {
-        public ContactController()
-			: base(GetDefaultUserContext(), GetDefaultSiteSettings())
+        public ContactController(Data.BrewClubContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
+			: base(dataContext, context, siteSettings)
 		{
 
 		}
 
-        public const string ContactRouteUrl = "Contact";
-        [GET(ContactRouteUrl)]
         public ActionResult Contact()
         {
             return View();
