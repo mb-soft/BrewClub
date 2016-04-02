@@ -12,6 +12,12 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         ArticleDetailsViewModel ConvertToArticleDetailsViewModel(Data.Article dataArticle);
         ICollection<ArticleDetailsViewModelComment> ConvertToArticleDetailsViewModelComment(IEnumerable<Data.ArticleComment> dataComments);
         ArticleDetailsViewModelComment ConvertToArticleDetailsViewModelComment(Data.ArticleComment dataComment);
-        Data.ArticleComment ConvertCreateCommentViewModelToDataArticle(CreateCommentViewModel model, UserProfile author, DateTime dateCreated);
+        EditCommentViewModel ConvertToEditCommentViewModel(Data.ArticleComment dataComment);
+        void ConvertEditCommentViewModelToDataComent(EditCommentViewModel model, DateTime dateEdited, ArticleComment commentToUpdate);
+        Data.ArticleComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, UserProfile author, DateTime dateCreated);
+        void ConvertArticleEditViewModelToDataArticle(ArticleEditViewModel model, DateTime dateEdited, Data.Article articleToUpdate);
+        ArticleEditViewModel ConvertToArticleEditViewModel(Data.Article dataArticle);
+        ArticleDeleteViewModel ConvertToArticleDeleteViewModel(Data.Article dataArticle);
+        DeleteCommentViewModel ConvertToDeleteCommentViewModel(Data.ArticleComment dataComment);
     }
 }

@@ -50,7 +50,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             };
         }
 
-        public Data.ArticleComment ConvertCreateCommentViewModelToDataArticle(CreateCommentViewModel model, UserProfile author, DateTime dateCreated)
+        public Data.ArticleComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, UserProfile author, DateTime dateCreated)
         {
             return new Data.ArticleComment()
             {
@@ -90,7 +90,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         {
             return new ArticleDetailsViewModelComment()
             {
-                ArticleCommentId = dataComment.ArticleCommentID,
+                ArticleCommentID = dataComment.ArticleCommentID,
                 AuthorName = dataComment.Author.DisplayName,
                 Body = dataComment.Body,
                 DateCreated = dataComment.DateCreated,
@@ -98,6 +98,62 @@ namespace mbsoft.BrewClub.Website.Models.Articles
 
         }
 
+        public ArticleEditViewModel ConvertToArticleEditViewModel(Data.Article dataArticle)
+        {
+            return new ArticleEditViewModel()
+            {
+                ArticleID = dataArticle.PostedItemID,
+                Body = dataArticle.Body,
+                Title = dataArticle.Title,
+            };
+        }
 
+        public void ConvertArticleEditViewModelToDataArticle(ArticleEditViewModel model, DateTime dateEdited, Data.Article articleToUpdate)
+        {
+            articleToUpdate.Body = model.Body;
+            articleToUpdate.Title = model.Title;
+            articleToUpdate.PostedItemID = model.ArticleID;
+            articleToUpdate.LastEdit = dateEdited;
+        }
+
+        public EditCommentViewModel ConvertToEditCommentViewModel(ArticleComment dataComment)
+        {
+            return new EditCommentViewModel()
+            {
+                Body = dataComment.Body,
+                CommentID = dataComment.ArticleCommentID,
+            };
+        }
+
+        public void ConvertEditCommentViewModelToDataComent(EditCommentViewModel model, DateTime dateEdited, ArticleComment commentToUpdate)
+        {
+            commentToUpdate.Body = model.Body;
+            commentToUpdate.LastEdit = dateEdited;
+        }
+
+        public ArticleDeleteViewModel ConvertToArticleDeleteViewModel(Article dataArticle)
+        {
+            return new ArticleDeleteViewModel()
+            {
+                ArticleID = dataArticle.PostedItemID,
+                AuthorName = dataArticle.Author.DisplayName,
+                Body = dataArticle.Body,
+                DateCreated = dataArticle.DateCreated,
+                DateLastEdited = dataArticle.LastEdit,
+                Title = dataArticle.Title,
+            };
+        }
+
+        public DeleteCommentViewModel ConvertToDeleteCommentViewModel(ArticleComment dataComment)
+        {
+            return new DeleteCommentViewModel()
+            {
+                ArticleCommentID = dataComment.ArticleCommentID,
+                ArticleID = dataComment.PostedItemID,
+                AuthorName = dataComment.Author.DisplayName,
+                Body = dataComment.Body,
+                DateCreated = dataComment.DateCreated,
+            };
+        }
     }
 }

@@ -5,40 +5,50 @@
     PageTitle = Localizer.Localize(LocalizedStringKeys.ArticlesTitle);
 }
 
-<div>
-    <h4>@Html.DisplayFor(model => model.Title)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.DateCreated)</dt>
-        <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
-        <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.DateLastEdited)</dt>
-        <dd>@Html.DisplayFor(model => model.DateLastEdited)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Body)</dt>
-        <dd>@Html.DisplayFor(model => model.Body)</dd>
-    </dl>
-    @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText), "edit", new { id = Model.ArticleID })
-
-    <h5>@Html.DisplayNameFor(model => model.Comments)</h5>
-    @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleCreateCommentLinkText), "CreateComment", new { articleID = Model.ArticleID })
-
-    <div class="articleCommentsList">
+<article>
+    <header>
+        <hgroup>
+            <h4>@Html.DisplayFor(model => model.Title)</h4>
+        </hgroup>
+    </header>
+    <section>
         <dl class="dl-horizontal">
-            @foreach (var comment in Model.Comments)
-            {
-                <dt>@Html.DisplayNameFor(model => comment.AuthorName)</dt>
-                <dd>@Html.DisplayFor(model => comment.AuthorName)</dd>
+            <dt>@Html.DisplayNameFor(model => model.Body)</dt>
+            <dd>@Html.DisplayFor(model => model.Body)</dd>
 
-                <dt>@Html.DisplayNameFor(model => comment.DateCreated)</dt>
-                <dd>@Html.DisplayFor(model => comment.DateCreated)</dd>
+            <dt>@Html.DisplayNameFor(model => model.DateCreated)</dt>
+            <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
 
-                <dt>@Html.DisplayNameFor(model => comment.Body)</dt>
-                <dd>@Html.DisplayFor(model => comment.Body)</dd>
-            }
-        </dl>
-    </div>
-</div>
+            <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
+            <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.DateLastEdited)</dt>
+            <dd>@Html.DisplayFor(model => model.DateLastEdited)</dd>
+
+            <dd>@Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText), "edit", new { articleID = Model.ArticleID }) | @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleDeleteLinkText), "delete", new { articleID = Model.ArticleID })</dd>
+        </dl>       
+    </section>
+
+    <section>
+        <h4>@Html.DisplayNameFor(model => model.Comments)</h4>
+        @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleCreateCommentLinkText), "CreateComment", new { articleID = Model.ArticleID })
+
+        <div class="articleCommentsList">
+            <dl class="dl-horizontal">
+                @foreach (var comment in Model.Comments)
+                {
+                    <dt>@Html.DisplayNameFor(model => comment.Body)</dt>
+                    <dd>@Html.DisplayFor(model => comment.Body)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => comment.AuthorName)</dt>
+                    <dd>@Html.DisplayFor(model => comment.AuthorName)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => comment.DateCreated)</dt>
+                    <dd>@Html.DisplayFor(model => comment.DateCreated)</dd>
+
+                    <dd>@Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleEditCommentLinkText), "EditComment", new { commentID = comment.ArticleCommentID }) | @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentLinkText), "DeleteComment", new { commentID = comment.ArticleCommentID })</dd>
+                }
+            </dl>
+        </div>
+    </section>
+</article>

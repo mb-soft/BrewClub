@@ -6,9 +6,11 @@ using System.Web;
 
 namespace mbsoft.BrewClub.Website.Models.Articles
 {
-    public class ArticleDetailsViewModelComment
+    public class DeleteCommentViewModel
     {
         public int ArticleCommentID { get; set; }
+
+        public int ArticleID { get; set; }
 
         [LocalizedDisplayName(LocalizedStringKeys.ArticleCommentAuthorNameLabel)]
         public string AuthorName { get; set; }

@@ -57,6 +57,81 @@ namespace mbsoft.BrewClub.Website.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Edit(int articleID)
+        {
+            var article = dataContext.Articles.Find(articleID);
+            if (article == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var model = articleModelConverter.ConvertToArticleEditViewModel(article);
+                return View(model);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ArticleEditViewModel article)
+        {
+            if (ModelState.IsValid == true)
+            {
+                var existingArticle = dataContext.Articles.Find(article.ArticleID);
+                if (existingArticle == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                else
+                {
+                    articleModelConverter.ConvertArticleEditViewModelToDataArticle(article, DateTime.Now, existingArticle);
+                    dataContext.SaveChanges();
+
+                    return RedirectToAction("details", new { articleID = article.ArticleID });
+                }
+            }
+            else
+            {
+                return View(article);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int articleID)
+        {
+            var article = dataContext.Articles.Find(articleID);
+            if (article == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var model = articleModelConverter.ConvertToArticleDeleteViewModel(article);
+                return View(model);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int articleID)
+        {
+            var existingArticle = dataContext.Articles.Find(articleID);
+            if (existingArticle == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                dataContext.Articles.Remove(existingArticle);
+                dataContext.SaveChanges();
+
+                return RedirectToAction("articles");
+            }
+        }
+
         [Route("{articleID:int}")]
         [Route("details/{articleID:int}")]
         public ActionResult Details(int articleID)
@@ -88,7 +163,7 @@ namespace mbsoft.BrewClub.Website.Controllers
             {
                 var user = GetDummyUser();
 
-                var convertedDataArticleComment = articleModelConverter.ConvertCreateCommentViewModelToDataArticle(comment, user, DateTime.Now);
+                var convertedDataArticleComment = articleModelConverter.ConvertCreateCommentViewModelToDataComment(comment, user, DateTime.Now);
                 dataContext.Articles.Find(comment.ArticleID).Comments.Add(convertedDataArticleComment);
                 dataContext.SaveChanges();
 
@@ -97,6 +172,81 @@ namespace mbsoft.BrewClub.Website.Controllers
             else
             {
                 return View(comment);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditComment(int commentID)
+        {
+            var comment = dataContext.ArticleComments.Find(commentID);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var model = articleModelConverter.ConvertToEditCommentViewModel(comment);
+                return View(model);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComment(EditCommentViewModel comment)
+        {
+            if (ModelState.IsValid == true)
+            {
+                var existingComment = dataContext.ArticleComments.Find(comment.CommentID);
+                if (existingComment == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                else
+                {
+                    articleModelConverter.ConvertEditCommentViewModelToDataComent(comment, DateTime.Now, existingComment);
+                    dataContext.SaveChanges(); 
+
+                    return RedirectToAction("details", new { articleID = existingComment.PostedItemID });
+                }
+            }
+            else
+            {
+                return View(comment);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteComment(int commentID)
+        {
+            var comment = dataContext.ArticleComments.Find(commentID);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var model = articleModelConverter.ConvertToDeleteCommentViewModel(comment);
+                return View(model);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCommentConfirmed(int commentID, int articleID)
+        {
+            var existingComment = dataContext.ArticleComments.Find(commentID);
+            if (existingComment == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                dataContext.ArticleComments.Remove(existingComment);
+                dataContext.SaveChanges();
+
+                return RedirectToAction("details", new { articleID = articleID });
             }
         }
 

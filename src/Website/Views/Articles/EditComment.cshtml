@@ -1,8 +1,7 @@
-﻿@model mbsoft.BrewClub.Website.Models.Articles.ArticleEditViewModel
+﻿@model mbsoft.BrewClub.Website.Models.Articles.EditCommentViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    PageTitle = Localizer.Localize(LocalizedStringKeys.ArticlesTitle);
 }
 
 @using (Html.BeginForm())
@@ -10,18 +9,10 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@Localizer.Localize(LocalizedStringKeys.ArticleEditArticleHeader)</h4>
+        <h4>@Localizer.Localize(LocalizedStringKeys.ArticleEditCommentHeader)</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ArticleID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.HiddenFor(model => model.CommentID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })

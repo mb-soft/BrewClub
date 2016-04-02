@@ -195,12 +195,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Articles\ArticleDeleteViewModel.cs" />
+    <Compile Include="Models\Articles\DeleteCommentViewModel.cs" />
+    <Compile Include="Models\Articles\ArticleEditViewModel.cs" />
     <Compile Include="Models\Articles\ArticleDetailsViewModel.cs" />
     <Compile Include="Models\Articles\ArticleDetailsViewModelComment.cs" />
     <Compile Include="Models\Articles\ArticlesViewModelListItem.cs" />
     <Compile Include="Models\Articles\ArticlesViewModel.cs" />
     <Compile Include="Models\Articles\ArticleViewModelConverter.cs" />
     <Compile Include="Models\Articles\ArticleCreateViewModel.cs" />
+    <Compile Include="Models\Articles\EditCommentViewModel.cs" />
     <Compile Include="Models\Articles\CreateCommentViewModel.cs" />
     <Compile Include="Models\Articles\IArticleViewModelConverter.cs" />
     <Compile Include="Models\Home\ViewIndex.cs" />
@@ -256,6 +260,9 @@
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\CreateComment.cshtml" />
+    <Content Include="Views\Articles\EditComment.cshtml" />
+    <Content Include="Views\Articles\Delete.cshtml" />
+    <Content Include="Views\Articles\DeleteComment.cshtml" />
     <None Include="Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>

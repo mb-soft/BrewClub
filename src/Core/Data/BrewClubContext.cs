@@ -13,18 +13,15 @@ namespace mbsoft.BrewClub.Data
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Article>().ToTable("Articles");
-			modelBuilder.Entity<Classified>().ToTable("Classifieds");
-			modelBuilder.Entity<Recipe>().ToTable("Recipes");
-            modelBuilder.Entity<UserProfile>().ToTable("UserProfiles");			
-		}
-		
+            base.OnModelCreating(modelBuilder);
+        }
 
-		public DbSet<PostedItem> PostedItems { get; set; } 
+        public DbSet<PostedItem> PostedItems { get; set; } 
 		public DbSet<Article> Articles { get; set; }
 		public DbSet<Classified> Classifieds { get; set; }
 		public DbSet<Recipe> Recipes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<ArticleComment> ArticleComments { get; set; }
 
     }
 
