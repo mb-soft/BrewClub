@@ -34,7 +34,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         //TODO throw this out once we figure out how the users are going to work.
         protected UserProfile GetDummyUser()
         {
-            return dataContext.UserProfiles.First();
+            return dataContext.UserProfiles.Find(1);
         }
 
 

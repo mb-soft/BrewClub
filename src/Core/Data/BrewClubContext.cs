@@ -16,12 +16,12 @@ namespace mbsoft.BrewClub.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<PostedItem> PostedItems { get; set; } 
-		public DbSet<Article> Articles { get; set; }
-		public DbSet<Classified> Classifieds { get; set; }
-		public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<ArticleComment> ArticleComments { get; set; }
+        public virtual DbSet<PostedItem> PostedItems { get; set; }
+        public virtual DbSet<Article> Articles { get; set; }
+        public virtual DbSet<Classified> Classifieds { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
+        public virtual DbSet<ArticleComment> ArticleComments { get; set; }
 
     }
 
