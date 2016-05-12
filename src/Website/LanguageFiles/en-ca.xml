@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<language>
+	<!-- values that should be customized: -->
+	<word key="BrewClubName" value="Westman Alers" />
+	<word key="SiteTitleFormat" value="Westman Alers - {0}" />
+  	
+	
+	<!-- values that probably don't need to be changed: -->
+	<word key="Buy and Sell" value="Buy and Sell" />
+	<word key="Contact" value="Contact" />
+	<word key="Home" value="Home" />
+	<word key="Login" value="Login" />
+	<word key="ArticlesTitle" value="Member Posts" />
+	<word key="Recipes" value="Recipes" />
+	<word key="Register" value="Register" />
+	<word key="Toggle navigation" value="Toggle navigation" />  
+
+  <!-- Articles -->
+  <word key="ArticleTitleLabel" value="Title" />
+  <word key="ArticleBodyLabel" value="Body" />
+  <word key="ArticleDateCreatedLabel" value="Posted" />
+  <word key="ArticleDateLastEditedLabel" value="Edited" />
+  <word key="ArticleCommentsLabel" value="Comments" />  
+  <word key="ArticleAuthorNameLabel" value="Posted By" />
+  <word key="ArticleCommentAuthorNameLabel" value="User" />
+  <word key="ArticleCommentBodyLabel" value="Comment" />
+  <word key="ArticleCommentDateCreatedLabel" value="Date" />
+  
+  <word key="ArticleEditArticleHeader" value="Edit Your Post" />
+  <word key="ArticleDeleteArticleHeader" value="Are You Sure You Want To Delete This Post?" />
+  <word key="ArticleCreateNewArticleHeader" value="Create Your Post" />
+  <word key="ArticleCreateNewCommentHeader" value="Create Comment" />
+  <word key="ArticleEditCommentHeader" value="Edit Comment" />
+  <word key="ArticleDeleteCommentHeader" value="Are You Sure You Want To Delete This Comment?" />
+  
+  <word key="ArticleEditLinkText" value="Edit Post" />
+  <word key="ArticleDeleteLinkText" value="Delete Post" />
+  <word key="ArticleCreateCommentLinkText" value="Add Comment" />
+  <word key="ArticleEditCommentLinkText" value="Edit Comment" />
+  <word key="ArticleDeleteCommentLinkText" value="Delete Comment" />
+  
+</language>

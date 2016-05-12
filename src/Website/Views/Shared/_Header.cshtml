@@ -5,26 +5,34 @@
 		<div class="navbar-header">
 			<!-- this button and spans serves as the mobile menu on small screens. -->
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar1" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
+				<span class="sr-only">@Localizer.Localize("Toggle navigation")</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Westman Alers</a>
+			<a class="navbar-brand" href="#">@Localizer.Localize(LocalizedStringKeys.BrewClubName)</a>
 		</div>
 		<div id="navbar1" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Login</a></li>
-				<li><a href="#about">Register</a></li>
-				<li><a href="#contact">Contact Us</a></li>
+				@if (UserState.IsAnonymous)
+				{
+					<li><a href="@Url.Action("Login", "Account")">@Localizer.Localize("Login")</a></li>
+					<li><a href="@Url.Action("Register", "Account")">@Localizer.Localize("Register")</a></li>
+				}
+				else
+				{
+					<li><a href="#">@Localizer.Localize("Post")</a></li>
+					<li><a href="@Url.Action("Logout", "Account")">@Localizer.Localize("Logout")</a></li>
+				}
+				<li><a href="/contact">@Localizer.Localize(LocalizedStringKeys.ContactTitle)</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 		<div id="navbar2" class="">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">Recipes</a></li>
-				<li><a href="#contact">Buy and Sell</a></li>
-				<li><a href="#">Member Posts</a></li>
+				<li class="active"><a href="@Url.Action("Index", "Home")">@Localizer.Localize("Home")</a></li>
+				<li><a href="#">@Localizer.Localize("Recipes")</a></li>
+				<li><a href="#">@Localizer.Localize("Buy and Sell")</a></li>
+				<li><a href="/articles">@Localizer.Localize(LocalizedStringKeys.ArticlesTitle)</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>

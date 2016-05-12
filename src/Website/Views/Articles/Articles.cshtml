@@ -1,0 +1,20 @@
+﻿@model mbsoft.BrewClub.Website.Models.Articles.ArticlesViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    PageTitle = Localizer.Localize(LocalizedStringKeys.ArticlesTitle);
+}
+
+<div class="createPostedItem">
+    @Html.ActionLink("Create a new post...", "create")
+</div>
+
+<ul class="postedItemsList">
+    @foreach (var article in Model.ArticleListItems)
+    {
+        var formattedLinkText = string.Format("{0} {1} {2} {3}", article.Title, article.AuthorName, article.LastActivity.ToString(), article.CommentCount.ToString());
+        <li>@Html.ActionLink(formattedLinkText, "details", new { articleID = article.ArticleId })</li>
+    }
+
+</ul>
