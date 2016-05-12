@@ -10,7 +10,7 @@ namespace mbsoft.BrewClub.Website.Controllers
     [RoutePrefix("contact")]
     public class ContactController : ControllerBase
     {
-        public ContactController(Data.BrewClubContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
+        public ContactController(Data.BrewClubDbContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
 			: base(dataContext, context, siteSettings)
 		{
 

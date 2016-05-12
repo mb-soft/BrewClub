@@ -13,7 +13,8 @@ namespace mbsoft.BrewClub.Data
 
 		public int PostedItemID { get; set; }
 
-        public virtual UserProfile Author { get; set; }
+        public virtual User Author { get; set; }
+
 
         public DateTime DateCreated { get; set; }
 

@@ -14,7 +14,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
 
         public int ArticleId { get; set; }
 
-        public int AuthorID { get; set; }
+        public string AuthorID { get; set; }
 
         public string AuthorName { get; set; }
 

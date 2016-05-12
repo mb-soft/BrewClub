@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Xunit;
 using System.Collections.Generic;
 using System.Net;
+using System;
 
 namespace WebsiteTests
 {
@@ -17,7 +18,7 @@ namespace WebsiteTests
         public void Index_ReturnsView()
         {
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -36,7 +37,7 @@ namespace WebsiteTests
         [Fact]
         public void CreateGet_ReturnsView()
         {
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             var userContext = new Mock<IUserContext>();
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
@@ -51,7 +52,7 @@ namespace WebsiteTests
         [Fact]
         public void CreatePost_InvalidModel_ReturnsView()
         {
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             var userContext = new Mock<IUserContext>();
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
@@ -69,14 +70,14 @@ namespace WebsiteTests
         [Fact]
         public void CreatePost_ValidModel_ReturnsRedirect()
         {
-            var userProfilesDbSet = new Mock<System.Data.Entity.DbSet<UserProfile>>();
-            var dummyUser = new UserProfile() { DisplayName = "test", UserProfileID = 1 };
+            var userProfilesDbSet = new Mock<System.Data.Entity.DbSet<User>>();
+            var dummyUser = new User() { Id = Guid.NewGuid().ToString(), UserName = "test", Email = "test@gmail.com", FullName = "Test Person" };
             userProfilesDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(dummyUser);
 
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
 
-            var dbContext = new Mock<BrewClubContext>();
-            dbContext.Setup(x => x.UserProfiles).Returns(userProfilesDbSet.Object);
+            var dbContext = new Mock<BrewClubDbContext>();
+            dbContext.Setup(x => x.Users).Returns(userProfilesDbSet.Object);
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -84,7 +85,7 @@ namespace WebsiteTests
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
             int articleID = 2;
-            modelConverter.Setup(x => x.ConvertArticleCreateViewModelToDataArticle(It.IsAny<ArticleCreateViewModel>(), It.IsAny<UserProfile>(), It.IsAny<System.DateTime>())).Returns(new Article() { PostedItemID = articleID });
+            modelConverter.Setup(x => x.ConvertArticleCreateViewModelToDataArticle(It.IsAny<ArticleCreateViewModel>(), It.IsAny<User>(), It.IsAny<System.DateTime>())).Returns(new Article() { PostedItemID = articleID });
 
             var model = new ArticleCreateViewModel();
 
@@ -103,7 +104,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new Article());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -123,7 +124,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<Article>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -144,7 +145,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<Article>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -164,7 +165,7 @@ namespace WebsiteTests
         [Fact]
         public void EditPost_InvalidModel_ReturnsView()
         {
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             var userContext = new Mock<IUserContext>();
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
@@ -185,7 +186,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new Article());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -212,7 +213,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<Article>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -233,7 +234,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new Article());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -253,7 +254,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<Article>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -275,7 +276,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new Article());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -296,7 +297,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<Article>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -317,7 +318,7 @@ namespace WebsiteTests
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new Article());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -336,7 +337,7 @@ namespace WebsiteTests
         [Fact]
         public void CreateCommentGet_ReturnsView()
         {
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             var userContext = new Mock<IUserContext>();
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
@@ -351,7 +352,7 @@ namespace WebsiteTests
         [Fact]
         public void CreateCommentPost_InvalidModel_ReturnsView()
         {
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             var userContext = new Mock<IUserContext>();
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
@@ -369,15 +370,15 @@ namespace WebsiteTests
         [Fact]
         public void CreateCommentPost_ValidModel_ReturnsRedirect()
         {
-            var userProfilesDbSet = new Mock<System.Data.Entity.DbSet<UserProfile>>();
-            var dummyUser = new UserProfile() { DisplayName = "test", UserProfileID = 1 };
+            var userProfilesDbSet = new Mock<System.Data.Entity.DbSet<User>>();
+            var dummyUser = new User() { Id = Guid.NewGuid().ToString(), UserName = "test", Email = "test@gmail.com", FullName = "Test Person" };
             userProfilesDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(dummyUser);
 
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
             articlesDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(new Article() { Comments = new List<ArticleComment>() });
 
-            var dbContext = new Mock<BrewClubContext>();
-            dbContext.Setup(x => x.UserProfiles).Returns(userProfilesDbSet.Object);
+            var dbContext = new Mock<BrewClubDbContext>();
+            dbContext.Setup(x => x.Users).Returns(userProfilesDbSet.Object);
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -385,7 +386,7 @@ namespace WebsiteTests
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
             int articleID = 2;
-            modelConverter.Setup(x => x.ConvertCreateCommentViewModelToDataComment(It.IsAny<CreateCommentViewModel>(), It.IsAny<UserProfile>(), It.IsAny<System.DateTime>())).Returns(new ArticleComment());
+            modelConverter.Setup(x => x.ConvertCreateCommentViewModelToDataComment(It.IsAny<CreateCommentViewModel>(), It.IsAny<User>(), It.IsAny<System.DateTime>())).Returns(new ArticleComment());
 
             var model = new CreateCommentViewModel() { ArticleID = articleID };
 
@@ -404,7 +405,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -425,7 +426,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -446,7 +447,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -466,7 +467,7 @@ namespace WebsiteTests
         [Fact]
         public void EditCommentPost_InvalidModel_ReturnsView()
         {
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             var userContext = new Mock<IUserContext>();
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
@@ -489,7 +490,7 @@ namespace WebsiteTests
             var existingComment = new ArticleComment() { PostedItemID = postedItemID };
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(existingComment);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -515,7 +516,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -536,7 +537,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new ArticleComment());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -558,7 +559,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();
@@ -580,7 +581,7 @@ namespace WebsiteTests
             var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new ArticleComment());
 
-            var dbContext = new Mock<BrewClubContext>();
+            var dbContext = new Mock<BrewClubDbContext>();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var userContext = new Mock<IUserContext>();

@@ -30,8 +30,8 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             return new ArticlesViewModelListItem()
             {
                 ArticleId = dataArticle.PostedItemID,
-                AuthorID = dataArticle.Author.UserProfileID,
-                AuthorName = dataArticle.Author.DisplayName,
+                AuthorID = dataArticle.Author.Id,
+                AuthorName = dataArticle.Author.FullName,
                 CommentCount = dataArticle.Comments.Count(),
                 LastActivity = dataArticle.GetLastActivity(),
                 Title = dataArticle.Title,
@@ -39,7 +39,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
 
         }
 
-        public Data.Article ConvertArticleCreateViewModelToDataArticle(ArticleCreateViewModel model, UserProfile author, DateTime dateCreated)
+        public Data.Article ConvertArticleCreateViewModelToDataArticle(ArticleCreateViewModel model, User author, DateTime dateCreated)
         {
             return new Data.Article()
             {
@@ -50,7 +50,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             };
         }
 
-        public Data.ArticleComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, UserProfile author, DateTime dateCreated)
+        public Data.ArticleComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, User author, DateTime dateCreated)
         {
             return new Data.ArticleComment()
             {
@@ -64,7 +64,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         {
             return new ArticleDetailsViewModel()
             {
-                AuthorName = dataArticle.Author.DisplayName,
+                AuthorName = dataArticle.Author.FullName,
                 Body = dataArticle.Body,
                 Comments = ConvertToArticleDetailsViewModelComment(dataArticle.Comments),
                 DateCreated = dataArticle.DateCreated,
@@ -91,7 +91,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             return new ArticleDetailsViewModelComment()
             {
                 ArticleCommentID = dataComment.ArticleCommentID,
-                AuthorName = dataComment.Author.DisplayName,
+                AuthorName = dataComment.Author.FullName,
                 Body = dataComment.Body,
                 DateCreated = dataComment.DateCreated,
             };
@@ -136,7 +136,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             return new ArticleDeleteViewModel()
             {
                 ArticleID = dataArticle.PostedItemID,
-                AuthorName = dataArticle.Author.DisplayName,
+                AuthorName = dataArticle.Author.FullName,
                 Body = dataArticle.Body,
                 DateCreated = dataArticle.DateCreated,
                 DateLastEdited = dataArticle.LastEdit,
@@ -150,7 +150,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             {
                 ArticleCommentID = dataComment.ArticleCommentID,
                 ArticleID = dataComment.PostedItemID,
-                AuthorName = dataComment.Author.DisplayName,
+                AuthorName = dataComment.Author.FullName,
                 Body = dataComment.Body,
                 DateCreated = dataComment.DateCreated,
             };

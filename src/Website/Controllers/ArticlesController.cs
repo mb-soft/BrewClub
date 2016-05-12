@@ -18,7 +18,7 @@ namespace mbsoft.BrewClub.Website.Controllers
     {
         private IArticleViewModelConverter articleModelConverter;
 
-        public ArticlesController(BrewClubContext dataContext, IUserContext context, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter)
+        public ArticlesController(BrewClubDbContext dataContext, IUserContext context, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter)
 			: base(dataContext, context, siteSettings)
 		{
             this.articleModelConverter = articleModelConverter;
@@ -43,7 +43,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                var user = GetDummyUser();
+                var user = GetCurrentUser();
 
                 var convertedDataArticle = articleModelConverter.ConvertArticleCreateViewModelToDataArticle(article, user, DateTime.Now);
                 dataContext.Articles.Add(convertedDataArticle);
@@ -161,7 +161,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                var user = GetDummyUser();
+                var user = GetCurrentUser();
 
                 var convertedDataArticleComment = articleModelConverter.ConvertCreateCommentViewModelToDataComment(comment, user, DateTime.Now);
                 dataContext.Articles.Find(comment.ArticleID).Comments.Add(convertedDataArticleComment);

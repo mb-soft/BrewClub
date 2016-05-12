@@ -6,11 +6,12 @@ namespace mbsoft.BrewClub.Website.Controllers
     public class HomeController : ControllerBase
 	{
 
-		public HomeController(Data.BrewClubContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
+		public HomeController(Data.BrewClubDbContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
             : base(dataContext, context, siteSettings)
         {
 
 		}
+
 
         [Route("index")]
         [Route("")]
