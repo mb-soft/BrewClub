@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "src\Website\Website.csproj", "{4F587400-ACED-43CF-9B8C-113922B50F3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{272BBE7A-55EA-49B5-B5F2-5E4F2AF73028}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{28489B40-A19B-4A50-816E-0EC1071A86EB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteTests", "WebsiteTests\WebsiteTests.csproj", "{0D474DC6-7422-4889-8744-0460790A4715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,15 +21,8 @@ Global
 		{272BBE7A-55EA-49B5-B5F2-5E4F2AF73028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{272BBE7A-55EA-49B5-B5F2-5E4F2AF73028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{272BBE7A-55EA-49B5-B5F2-5E4F2AF73028}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D474DC6-7422-4889-8744-0460790A4715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D474DC6-7422-4889-8744-0460790A4715}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D474DC6-7422-4889-8744-0460790A4715}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D474DC6-7422-4889-8744-0460790A4715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{0D474DC6-7422-4889-8744-0460790A4715} = {28489B40-A19B-4A50-816E-0EC1071A86EB}
 	EndGlobalSection
 EndGlobal

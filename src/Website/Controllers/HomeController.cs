@@ -1,21 +1,25 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using AttributeRouting.Web.Mvc;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
-
-    public class HomeController : ControllerBase
+	public class HomeController : Controller
 	{
-
-		public HomeController(Data.BrewClubContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
-            : base(dataContext, context, siteSettings)
-        {
-
+		[GET("")]
+		public ActionResult Index()
+		{
+			return View();
 		}
 
-        [Route("index")]
-        [Route("")]
-        public ActionResult Index()
+		[GET("about")]
+		public ActionResult About()
 		{
+			ViewBag.Message = "Your application description page.";
+
 			return View();
 		}
 

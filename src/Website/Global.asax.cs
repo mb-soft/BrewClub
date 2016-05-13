@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Data.Entity;
-
 
 namespace mbsoft.BrewClub.Website
 {
@@ -14,9 +12,6 @@ namespace mbsoft.BrewClub.Website
     {
         protected void Application_Start()
         {
-            //TODO: Remove this after we go live.
-            Database.SetInitializer(new BrewClub.Data.BrewClubTestingInitializer());
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
