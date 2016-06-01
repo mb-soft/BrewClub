@@ -18,8 +18,8 @@ namespace mbsoft.BrewClub.Website.Controllers
 	{
 		private BrewClubUserManager userManager;
 
-		public AccountController(Data.BrewClubDbContext dataContext, IUserContext userContext, ISiteSettings siteSettings, BrewClubUserManager userManager)
-			: base(dataContext, userContext, siteSettings)
+		public AccountController(Data.BrewClubDbContext dataContext, ISiteSettings siteSettings, BrewClubUserManager userManager)
+			: base(dataContext, siteSettings)
 		{
 			this.userManager = userManager;
 		}

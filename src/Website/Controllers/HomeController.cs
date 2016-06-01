@@ -6,8 +6,8 @@ namespace mbsoft.BrewClub.Website.Controllers
     public class HomeController : ControllerBase
 	{
 
-		public HomeController(Data.BrewClubDbContext dataContext, IUserContext context, Settings.ISiteSettings siteSettings)
-            : base(dataContext, context, siteSettings)
+		public HomeController(Data.BrewClubDbContext dataContext, Settings.ISiteSettings siteSettings)
+            : base(dataContext, siteSettings)
         {
 
 		}

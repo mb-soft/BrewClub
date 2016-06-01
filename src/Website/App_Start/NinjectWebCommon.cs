@@ -65,7 +65,7 @@ namespace mbsoft.BrewClub.Website.App_Start
             kernel.Bind<IUserContext>().To<UserContext>();
             kernel.Bind<ISiteSettings>().ToMethod(x => SiteSettings.GetInstance());
             kernel.Bind<Data.BrewClubDbContext>().To<Data.BrewClubDbContext>();
-            kernel.Bind<Data.BrewClubUserManager>().To<Data.BrewClubUserManager>();
+            kernel.Bind<Data.BrewClubUserManager>().ToMethod(x => Data.BrewClubUserManager.Create(new Data.BrewClubDbContext()));
         }        
     }
 }

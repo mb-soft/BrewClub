@@ -18,8 +18,8 @@ namespace mbsoft.BrewClub.Website.Controllers
     {
         private IArticleViewModelConverter articleModelConverter;
 
-        public ArticlesController(BrewClubDbContext dataContext, IUserContext context, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter)
-			: base(dataContext, context, siteSettings)
+        public ArticlesController(BrewClubDbContext dataContext, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter)
+			: base(dataContext, siteSettings)
 		{
             this.articleModelConverter = articleModelConverter;
         }

@@ -20,22 +20,16 @@ namespace mbsoft.BrewClub.Website.Controllers
 
 		private DateTime requestStart;
         protected BrewClubDbContext dataContext { get; }
-        protected IUserContext userContext { get;  }
-        protected ISiteSettings siteSettings { get; }
+         protected ISiteSettings siteSettings { get; }
 
 
-		public ControllerBase(BrewClubDbContext dataContext, IUserContext context, ISiteSettings siteSettings)
+		public ControllerBase(BrewClubDbContext dataContext, ISiteSettings siteSettings)
 		{
 			requestStart = DateTime.Now;
             this.dataContext = dataContext;
-			this.userContext = context;
 			this.siteSettings = siteSettings;
 		}
 
-		protected static IUserContext GetDefaultUserContext()
-		{
-			return new UserContext();
-		}
 
 		protected override void OnActionExecuted(ActionExecutedContext filterContext)
 		{

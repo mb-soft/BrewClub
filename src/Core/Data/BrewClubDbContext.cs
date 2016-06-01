@@ -15,11 +15,11 @@ namespace mbsoft.BrewClub.Data
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 	        base.OnModelCreating(modelBuilder);
-        
-			modelBuilder.Entity<IdentityUserLogin>().HasKey(u => u.UserId);
-			modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id);
-			modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
-		}
+
+            //modelBuilder.Entity<IdentityUserLogin>().HasKey(u => u.UserId);
+            //modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id);
+            //modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+        }
 		
         public virtual DbSet<PostedItem> PostedItems { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
