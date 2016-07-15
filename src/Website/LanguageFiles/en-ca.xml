@@ -48,6 +48,7 @@
   <word key="ArticleEditCommentHeader" value="Edit Comment" />
   <word key="ArticleDeleteCommentHeader" value="Are You Sure You Want To Delete This Comment?" />
   
+  <word key="ArticleCreateArticleLinkText" value="Create New Post" />
   <word key="ArticleEditLinkText" value="Edit Post" />
   <word key="ArticleDeleteLinkText" value="Delete Post" />
   <word key="ArticleCreateCommentLinkText" value="Add Comment" />

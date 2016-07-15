@@ -13,6 +13,7 @@ namespace mbsoft.BrewClub.Data
 
 		public int PostedItemID { get; set; }
 
+        [Required]
         public virtual User Author { get; set; }
 
 

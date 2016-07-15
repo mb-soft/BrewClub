@@ -6,7 +6,7 @@ using System.Web;
 
 namespace mbsoft.BrewClub.Website.Models.Articles
 {
-    public class ArticleDetailsViewModelComment
+    public class CommentDetailsViewModel
     {
         public int ArticleCommentID { get; set; }
 

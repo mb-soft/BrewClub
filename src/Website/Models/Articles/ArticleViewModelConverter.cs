@@ -74,9 +74,9 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             };
         }
 
-        public ICollection<ArticleDetailsViewModelComment> ConvertToArticleDetailsViewModelComment(IEnumerable<Data.ArticleComment> dataComments)
+        public ICollection<CommentDetailsViewModel> ConvertToArticleDetailsViewModelComment(IEnumerable<Data.ArticleComment> dataComments)
         {
-            var convertedComments = new List<ArticleDetailsViewModelComment>();
+            var convertedComments = new List<CommentDetailsViewModel>();
 
             foreach (var comment in dataComments)
             {
@@ -86,9 +86,9 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             return convertedComments;
         }
 
-        public ArticleDetailsViewModelComment ConvertToArticleDetailsViewModelComment(Data.ArticleComment dataComment)
+        public CommentDetailsViewModel ConvertToArticleDetailsViewModelComment(Data.ArticleComment dataComment)
         {
-            return new ArticleDetailsViewModelComment()
+            return new CommentDetailsViewModel()
             {
                 ArticleCommentID = dataComment.ArticleCommentID,
                 AuthorName = dataComment.Author.FullName,

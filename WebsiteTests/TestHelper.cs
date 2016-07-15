@@ -1,7 +1,11 @@
 ﻿using mbsoft.BrewClub.Data;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -10,9 +14,16 @@ namespace WebsiteTests
 {
     class TestHelper
     {
+        private static User testUser;
+
         public static User GetTestUser()
         {
-            return new User() { Id = Guid.NewGuid().ToString(), UserName = "test", Email = "test@gmail.com", FullName = "Test Person" };            
+            if (testUser == null)
+            {
+                testUser = new User() { Id = Guid.NewGuid().ToString(), UserName = "test", Email = "test@gmail.com", FullName = "Test Person" };
+            }
+
+            return testUser;
         }
 
         public static Mock<BrewClubDbContext> GetMockedBrewClubDBContext()
@@ -20,11 +31,21 @@ namespace WebsiteTests
             //CallBase must be true otherwise you'll get 'IdentityUserLogin' has no key defined errors. 
             var mockDbContext = new Mock<BrewClubDbContext>() { CallBase = true };
 
-            var userProfilesDbSet = new Mock<System.Data.Entity.DbSet<User>>();
-            var dummyUser = new User() { Id = Guid.NewGuid().ToString(), UserName = "test", Email = "test@gmail.com", FullName = "Test Person" };
-            userProfilesDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(dummyUser);
+            //Create dummy user test data, have to support IQueryable mocking in order to support DBSet.First() extension method usage.
+            var users = new List<User>() { GetTestUser() };
+            IQueryable<User> queryableUsers = users.AsQueryable();
+            var userDbSet = new Mock<System.Data.Entity.DbSet<User>>();
+            userDbSet.As<IQueryable<User>>().Setup(x => x.Provider).Returns(queryableUsers.Provider);
+            userDbSet.As<IQueryable<User>>().Setup(x => x.Expression).Returns(queryableUsers.Expression);
+            userDbSet.As<IQueryable<User>>().Setup(x => x.ElementType).Returns(queryableUsers.ElementType);
+            userDbSet.As<IQueryable<User>>().Setup(x => x.GetEnumerator()).Returns(queryableUsers.GetEnumerator());
 
-            mockDbContext.Setup(x => x.Users).Returns(userProfilesDbSet.Object);
+            var observableUserCollection = new ObservableCollection<User>(users);
+            userDbSet.Setup(x => x.Local).Returns(observableUserCollection);
+
+            userDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(GetTestUser());
+
+            mockDbContext.Setup(x => x.Users).Returns(userDbSet.Object);
 
             return mockDbContext;
         }

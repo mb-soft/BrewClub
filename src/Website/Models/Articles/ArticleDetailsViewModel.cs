@@ -26,6 +26,6 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         public DateTime? DateLastEdited { get; set; }
 
         [LocalizedDisplayName(LocalizedStringKeys.ArticleCommentsLabel)]
-        public ICollection<ArticleDetailsViewModelComment> Comments { get; set; } = new List<ArticleDetailsViewModelComment>();
+        public ICollection<CommentDetailsViewModel> Comments { get; set; } = new List<CommentDetailsViewModel>();
     }
 }

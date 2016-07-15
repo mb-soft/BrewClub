@@ -10,8 +10,8 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         ArticlesViewModel ConvertToArticlesViewModel(IEnumerable<Article> dataArticles);
         Article ConvertArticleCreateViewModelToDataArticle(ArticleCreateViewModel model, User author, DateTime dateCreated);
         ArticleDetailsViewModel ConvertToArticleDetailsViewModel(Data.Article dataArticle);
-        ICollection<ArticleDetailsViewModelComment> ConvertToArticleDetailsViewModelComment(IEnumerable<Data.ArticleComment> dataComments);
-        ArticleDetailsViewModelComment ConvertToArticleDetailsViewModelComment(Data.ArticleComment dataComment);
+        ICollection<CommentDetailsViewModel> ConvertToArticleDetailsViewModelComment(IEnumerable<Data.ArticleComment> dataComments);
+        CommentDetailsViewModel ConvertToArticleDetailsViewModelComment(Data.ArticleComment dataComment);
         EditCommentViewModel ConvertToEditCommentViewModel(Data.ArticleComment dataComment);
         void ConvertEditCommentViewModelToDataComent(EditCommentViewModel model, DateTime dateEdited, ArticleComment commentToUpdate);
         Data.ArticleComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, User author, DateTime dateCreated);

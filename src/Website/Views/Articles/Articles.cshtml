@@ -7,14 +7,23 @@
 }
 
 <div class="createPostedItem">
-    @Html.ActionLink("Create a new post...", "create")
+    <a href="@Url.Action("create")" class="btn btn-success" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleCreateArticleLinkText)</a>
 </div>
 
-<ul class="postedItemsList">
+<p></p>
+
+<div class="list-group">
     @foreach (var article in Model.ArticleListItems)
     {
-        var formattedLinkText = string.Format("{0} {1} {2} {3}", article.Title, article.AuthorName, article.LastActivity.ToString(), article.CommentCount.ToString());
-        <li>@Html.ActionLink(formattedLinkText, "details", new { articleID = article.ArticleId })</li>
+        <div class="list-group-item">
+            <a href="@Url.Action("details", new { articleID = article.ArticleId })" class="list-group-item-heading">
+                <h4>                    
+                    @article.Title
+                </h4>
+            </a>
+            <p class="label label-default">@article.CommentCount.ToString()</p>
+            <p class="label label-info label-pill">@article.AuthorName</p>
+            <p class="label label-info label-pill">@article.LastActivity.ToString()</p>
+        </div>
     }
-
-</ul>
+</div>

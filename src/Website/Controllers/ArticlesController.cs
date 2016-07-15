@@ -32,12 +32,14 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ArticleCreateViewModel article)
         {
@@ -58,6 +60,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(int articleID)
         {
             var article = dataContext.Articles.Find(articleID);
@@ -74,6 +77,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ArticleEditViewModel article)
         {
@@ -99,6 +103,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Delete(int articleID)
         {
             var article = dataContext.Articles.Find(articleID);
@@ -115,6 +120,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int articleID)
         {
@@ -149,6 +155,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult CreateComment(int articleID)
         {
             var model = new CreateCommentViewModel() { ArticleID = articleID };
@@ -156,6 +163,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment(CreateCommentViewModel comment)
         {
@@ -176,6 +184,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult EditComment(int commentID)
         {
             var comment = dataContext.ArticleComments.Find(commentID);
@@ -192,6 +201,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult EditComment(EditCommentViewModel comment)
         {
@@ -217,6 +227,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult DeleteComment(int commentID)
         {
             var comment = dataContext.ArticleComments.Find(commentID);
@@ -233,6 +244,7 @@ namespace mbsoft.BrewClub.Website.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteCommentConfirmed(int commentID, int articleID)
         {

@@ -35,6 +35,7 @@ namespace mbsoft.BrewClub.Website
         public const string ArticleEditCommentHeader = "ArticleEditCommentHeader";
         public const string ArticleDeleteCommentHeader = "ArticleDeleteCommentHeader";
 
+        public const string ArticleCreateArticleLinkText = "ArticleCreateArticleLinkText";
         public const string ArticleEditLinkText = "ArticleEditLinkText";
         public const string ArticleDeleteLinkText = "ArticleDeleteLinkText";
         public const string ArticleCreateCommentLinkText = "ArticleCreateCommentLinkText";
