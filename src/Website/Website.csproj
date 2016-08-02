@@ -252,6 +252,7 @@
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\brewclub.css" />
     <Content Include="assets\css\site.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -294,6 +295,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Views\Account\_Login.cshtml" />
     <Content Include="Views\Account\_Register.cshtml" />
+    <Content Include="Views\Articles\RenderNotifications.js.cshtml" />
     <None Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_RecentActivity.cshtml" />
   </ItemGroup>

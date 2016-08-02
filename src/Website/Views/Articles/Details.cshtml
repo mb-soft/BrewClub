@@ -6,49 +6,55 @@
 }
 
 <article>
-    <header>
-        <hgroup>
-            <h4>@Html.DisplayFor(model => model.Title)</h4>
-        </hgroup>
-    </header>
-    <section>
-        <dl class="dl-horizontal">
-            <dt>@Html.DisplayNameFor(model => model.Body)</dt>
-            <dd>@Html.DisplayFor(model => model.Body)</dd>
+    <section>       
+        <div class="panel panel-primary panel-posted-item">
+            <div class="panel-heading panel-posted-item-heading">
+                <h3 class="panel-title posted-item-title">
+                    @Html.DisplayFor(model => model.Title)
+                </h3>
+            </div>
 
-            <dt>@Html.DisplayNameFor(model => model.DateCreated)</dt>
-            <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
+            <div class="panel-body posted-item-body">
+                <p>@Html.DisplayFor(model => model.Body)</p>
+            </div>
 
-            <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
-            <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.DateLastEdited)</dt>
-            <dd>@Html.DisplayFor(model => model.DateLastEdited)</dd>
-
-            <dd>@Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText), "edit", new { articleID = Model.ArticleID }) | @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleDeleteLinkText), "delete", new { articleID = Model.ArticleID })</dd>
-        </dl>       
+            <div class="panel-footer panel-posted-item-footer">
+                <p class="label label-info label-pill label-posted-item-detail">@Model.AuthorName </p>
+                <p class="label label-info label-pill label-posted-item-detail">@Model.DateCreated.ToString() </p>
+                <p></p>
+                <div class="btn-group btn-group-sm">
+                    <a href="@Url.Action("edit", new { articleID = Model.ArticleID })" type="button" class="btn btn-primary btn-postd-item-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText)</a>
+                    <a href="@Url.Action("delete", new { articleID = Model.ArticleID })" type="button" class="btn btn-danger btn-posted-item-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteLinkText)</a>
+                </div>
+            </div>
+        </div>       
     </section>
 
     <section>
-        <h4>@Html.DisplayNameFor(model => model.Comments)</h4>
-        @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleCreateCommentLinkText), "CreateComment", new { articleID = Model.ArticleID })
+        <div>
+            <a href="@Url.Action("CreateComment", new { articleID = Model.ArticleID })" class="btn btn-success" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleCreateCommentLinkText)</a>
+        </div>
+        <p></p>
+        
+        <div class="posted-item-comment-list">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="panel panel-info panel-posted-item-comment">
+                    <div class="panel-body posted-item-comment-body">
+                        <p>@Html.DisplayFor(model => comment.Body)</p>
+                    </div>
 
-        <div class="articleCommentsList">
-            <dl class="dl-horizontal">
-                @foreach (var comment in Model.Comments)
-                {
-                    <dt>@Html.DisplayNameFor(model => comment.Body)</dt>
-                    <dd>@Html.DisplayFor(model => comment.Body)</dd>
-
-                    <dt>@Html.DisplayNameFor(model => comment.AuthorName)</dt>
-                    <dd>@Html.DisplayFor(model => comment.AuthorName)</dd>
-
-                    <dt>@Html.DisplayNameFor(model => comment.DateCreated)</dt>
-                    <dd>@Html.DisplayFor(model => comment.DateCreated)</dd>
-
-                    <dd>@Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleEditCommentLinkText), "EditComment", new { commentID = comment.ArticleCommentID }) | @Html.ActionLink(Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentLinkText), "DeleteComment", new { commentID = comment.ArticleCommentID })</dd>
-                }
-            </dl>
+                    <div class="panel-footer panel-posted-item-comment-footer">
+                        <p class="label label-info label-pill label-posted-item-comment-detail">@comment.AuthorName </p>
+                        <p class="label label-info label-pill label-posted-item-comment-detail">@comment.DateCreated.ToString() </p>
+                        <p></p>
+                        <div class="btn-group btn-group-sm">
+                            <a href="@Url.Action("EditComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-primary btn-postd-item-comment-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditCommentLinkText)</a>
+                            <a href="@Url.Action("DeleteComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-danger btn-posted-item-comment-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentLinkText)</a>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </section>
 </article>
