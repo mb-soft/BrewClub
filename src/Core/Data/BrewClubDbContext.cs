@@ -16,6 +16,8 @@ namespace mbsoft.BrewClub.Data
 		{
 	        base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<PostedItem>().HasRequired(x => x.Author);
+
             //modelBuilder.Entity<IdentityUserLogin>().HasKey(u => u.UserId);
             //modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id);
             //modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });

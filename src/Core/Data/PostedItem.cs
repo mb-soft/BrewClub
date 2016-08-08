@@ -13,7 +13,7 @@ namespace mbsoft.BrewClub.Data
 
 		public int PostedItemID { get; set; }
 
-        [Required]
+        //Can't use Required attribute here or we get lazy loading update error on save.
         public virtual User Author { get; set; }
 
 
