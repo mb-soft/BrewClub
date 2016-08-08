@@ -14,25 +14,26 @@
         <hr />
         @Html.HiddenFor(model => model.ArticleID)
 
-        <h4>@Html.DisplayFor(model => model.Title)</h4>
+        <div class="panel panel-primary panel-posted-item">
+            <div class="panel-heading panel-posted-item-heading">
+                <h3 class="panel-title posted-item-title">
+                    @Html.DisplayFor(model => model.Title)
+                </h3>
+            </div>
 
-        <dl class="dl-horizontal">
-            <dt>@Html.DisplayNameFor(model => model.Body)</dt>
-            <dd>@Html.DisplayFor(model => model.Body)</dd>
+            <div class="panel-body posted-item-body">
+                <p>@Html.DisplayFor(model => model.Body)</p>
+            </div>
 
-            <dt>@Html.DisplayNameFor(model => model.DateCreated)</dt>
-            <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
-            <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.DateLastEdited)</dt>
-            <dd>@Html.DisplayFor(model => model.DateLastEdited)</dd>
-        </dl>
+            <div class="panel-footer panel-posted-item-footer">
+                <p class="label label-info label-pill label-posted-item-detail">@Model.AuthorName </p>
+                <p class="label label-info label-pill label-posted-item-detail">@Model.DateCreated.ToString() </p>
+            </div>
+        </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Delete" class="btn btn-default" />
+            <div class="col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" />
             </div>
         </div>
     </div>

@@ -10,24 +10,24 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentHeader)</h4>
+        <h3>@Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentHeader)</h3>
         <hr />
         @Html.HiddenFor(model => model.ArticleID)
 
-        <dl class="dl-horizontal">
-            <dt>@Html.DisplayNameFor(model => model.Body)</dt>
-            <dd>@Html.DisplayFor(model => model.Body)</dd>
+        <div class="panel panel-info panel-posted-item-comment">
+            <div class="panel-body posted-item-comment-body">
+                <p>@Html.DisplayFor(model => Model.Body)</p>
+            </div>
 
-            <dt>@Html.DisplayNameFor(model => model.DateCreated)</dt>
-            <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
-            <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
-        </dl>
+            <div class="panel-footer panel-posted-item-comment-footer">
+                <p class="label label-info label-pill label-posted-item-comment-detail">@Model.AuthorName </p>
+                <p class="label label-info label-pill label-posted-item-comment-detail">@Model.DateCreated.ToString() </p>              
+            </div>
+        </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Delete" class="btn btn-default" />
+            <div class="col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" />
             </div>
         </div>
     </div>

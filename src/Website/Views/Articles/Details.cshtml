@@ -23,8 +23,8 @@
                 <p class="label label-info label-pill label-posted-item-detail">@Model.DateCreated.ToString() </p>
                 <p></p>
                 <div class="btn-group btn-group-sm">
-                    <a href="@Url.Action("edit", new { articleID = Model.ArticleID })" type="button" class="btn btn-primary btn-postd-item-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText)</a>
-                    <a href="@Url.Action("delete", new { articleID = Model.ArticleID })" type="button" class="btn btn-danger btn-posted-item-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteLinkText)</a>
+                    <a href="@Url.Action("edit", new { articleID = Model.ArticleID })" type="button" class="btn btn-success btn-postd-item-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText)</a>
+                    <a href="@Url.Action("delete", new { articleID = Model.ArticleID })" type="button" class="btn btn-warning btn-posted-item-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteLinkText)</a>
                 </div>
             </div>
         </div>       
@@ -49,8 +49,8 @@
                         <p class="label label-info label-pill label-posted-item-comment-detail">@comment.DateCreated.ToString() </p>
                         <p></p>
                         <div class="btn-group btn-group-sm">
-                            <a href="@Url.Action("EditComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-primary btn-postd-item-comment-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditCommentLinkText)</a>
-                            <a href="@Url.Action("DeleteComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-danger btn-posted-item-comment-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentLinkText)</a>
+                            <a href="@Url.Action("EditComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-success btn-postd-item-comment-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditCommentLinkText)</a>
+                            <a href="@Url.Action("DeleteComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-warning btn-posted-item-comment-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentLinkText)</a>
                         </div>
                     </div>
                 </div>
