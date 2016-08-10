@@ -14,6 +14,7 @@ namespace mbsoft.BrewClub.Data
 		public int PostedItemID { get; set; }
 
         //Can't use Required attribute here or we get lazy loading update error on save.
+        //Required is defined via fluent API
         public virtual User Author { get; set; }
 
 
