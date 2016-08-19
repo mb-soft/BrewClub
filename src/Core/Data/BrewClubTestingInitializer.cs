@@ -40,10 +40,10 @@ namespace mbsoft.BrewClub.Data
             userManager.AddToRole(mike.Id, admin.Name);
             // userMamager.AddToRole(brad.Id, admin.Name);
 
-            var articleComments = new List<ArticleComment>
+            var articleComments = new List<PostedItemComment>
             {
-                new ArticleComment { ArticleCommentID = 1, Author = mike, Body = "killer post man", DateCreated = DateTime.Now },
-                new ArticleComment { ArticleCommentID = 2, Author = mike, Body = "pretty weak dude", DateCreated = DateTime.Now }
+                new PostedItemComment { PostedItemCommentID = 1, Author = mike, Body = "killer post man", DateCreated = DateTime.Now },
+                new PostedItemComment { PostedItemCommentID = 2, Author = mike, Body = "pretty weak dude", DateCreated = DateTime.Now }
             };
 
             var articles = new List<Article>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mbsoft.BrewClub.Authorization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Data
 {
-	public class ArticleComment
+	public class PostedItemComment : IAuthorizableComment
 	{
 
-		public int ArticleCommentID { get; set; }
+		public int PostedItemCommentID { get; set; }
 
         public int PostedItemID { get; set; }
 
@@ -24,5 +25,12 @@ namespace mbsoft.BrewClub.Data
         [Required]
         public string Body { get; set; }
 
-	}
+        string IAuthorizableComment.CommentAuthorID
+        {
+            get
+            {
+                return Author.Id;
+            }
+        }
+    }
 }

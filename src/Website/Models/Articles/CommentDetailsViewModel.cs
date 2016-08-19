@@ -19,5 +19,9 @@ namespace mbsoft.BrewClub.Website.Models.Articles
 
         [LocalizedDisplayName(LocalizedStringKeys.ArticleCommentDateCreatedLabel)]
         public DateTime DateCreated { get; set; }
+
+        public bool IsEditAuthorized { get; set; }
+
+        public bool IsDeleteAuthorized { get; set; }
     }
 }

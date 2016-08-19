@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mbsoft.BrewClub.Authorization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace mbsoft.BrewClub.Data
 {
-	public class PostedItem
+	public class PostedItem : IAuthorizablePostedItem
 	{
-
 		public int PostedItemID { get; set; }
 
         //Can't use Required attribute here or we get lazy loading update error on save.
         //Required is defined via fluent API
         public virtual User Author { get; set; }
-
 
         public DateTime DateCreated { get; set; }
 
@@ -29,5 +28,13 @@ namespace mbsoft.BrewClub.Data
         {
             return (this.LastEdit.HasValue == true) ? this.LastEdit.Value : this.DateCreated;
         }
-	}
+
+        string IAuthorizablePostedItem.PostedItemAuthorID
+        {
+            get
+            {
+                return Author.Id;
+            }
+        }
+    }
 }

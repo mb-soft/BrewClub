@@ -1,4 +1,5 @@
-﻿using mbsoft.BrewClub.Data;
+﻿using mbsoft.BrewClub.Authorization;
+using mbsoft.BrewClub.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,19 @@ namespace mbsoft.BrewClub.Website.Models.Articles
 {
     public class ArticleViewModelConverter : IArticleViewModelConverter
     {
-        public ArticleViewModelConverter()
-        {
+        private IPostedItemAuthorizer postedItemAuthorizer;
 
+        public ArticleViewModelConverter(IPostedItemAuthorizer postedItemAuthorizer)
+        {
+            this.postedItemAuthorizer = postedItemAuthorizer;
         }
 
-        public ArticlesViewModel ConvertToArticlesViewModel(IEnumerable<BrewClub.Data.Article> dataArticles)
+        public ArticlesViewModel ConvertToArticlesViewModel(IEnumerable<Article> dataArticles, IEnumerable<string> currentUserRoleIDs)
         {
-            var convertedArticles = new ArticlesViewModel();
+            var convertedArticles = new ArticlesViewModel()
+            {
+                IsCreateArticleAuthorized = postedItemAuthorizer.IsAllowedToCreatePost(currentUserRoleIDs),
+            };
 
             foreach (var dataArticle in dataArticles)
             {
@@ -25,7 +31,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             return convertedArticles;
         }
 
-        public ArticlesViewModelListItem ConvertToArticlesViewModelItem(BrewClub.Data.Article dataArticle)
+        public ArticlesViewModelListItem ConvertToArticlesViewModelItem(Article dataArticle)
         {
             return new ArticlesViewModelListItem()
             {
@@ -50,9 +56,9 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             };
         }
 
-        public Data.ArticleComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, User author, DateTime dateCreated)
+        public Data.PostedItemComment ConvertCreateCommentViewModelToDataComment(CreateCommentViewModel model, User author, DateTime dateCreated)
         {
-            return new Data.ArticleComment()
+            return new Data.PostedItemComment()
             {
                 Author = author,
                 Body = model.Body,
@@ -60,40 +66,45 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             };
         }
 
-        public ArticleDetailsViewModel ConvertToArticleDetailsViewModel(Data.Article dataArticle)
+        public ArticleDetailsViewModel ConvertToArticleDetailsViewModel(Article dataArticle, IEnumerable<string> currentUserRoleIDs, string currentUserID)
         {
             return new ArticleDetailsViewModel()
             {
                 AuthorName = dataArticle.Author.FullName,
                 Body = dataArticle.Body,
-                Comments = ConvertToArticleDetailsViewModelComment(dataArticle.Comments),
+                Comments = ConvertToArticleDetailsViewModelCommentCollection(dataArticle.Comments, currentUserRoleIDs, currentUserID),
                 DateCreated = dataArticle.DateCreated,
                 DateLastEdited = dataArticle.LastEdit,
                 ArticleID = dataArticle.PostedItemID,
                 Title = dataArticle.Title,
+                IsDeleteAuthorized = postedItemAuthorizer.IsPostedItemDeletable(currentUserID, currentUserRoleIDs, dataArticle),
+                IsEditAuthorized = postedItemAuthorizer.IsPostedItemEditable(currentUserID, currentUserRoleIDs, dataArticle),
+                IsCreateCommentAuthorized = postedItemAuthorizer.IsAllowedToCreatPostComment(currentUserRoleIDs),
             };
         }
 
-        public ICollection<CommentDetailsViewModel> ConvertToArticleDetailsViewModelComment(IEnumerable<Data.ArticleComment> dataComments)
+        public ICollection<CommentDetailsViewModel> ConvertToArticleDetailsViewModelCommentCollection(IEnumerable<Data.PostedItemComment> dataComments, IEnumerable<string> currentUserRoleIDs, string currentUserID)
         {
             var convertedComments = new List<CommentDetailsViewModel>();
 
             foreach (var comment in dataComments)
             {
-                convertedComments.Add(ConvertToArticleDetailsViewModelComment(comment));
+                convertedComments.Add(ConvertToArticleDetailsViewModelComment(comment, currentUserRoleIDs, currentUserID));
             }
 
             return convertedComments;
         }
 
-        public CommentDetailsViewModel ConvertToArticleDetailsViewModelComment(Data.ArticleComment dataComment)
+        public CommentDetailsViewModel ConvertToArticleDetailsViewModelComment(PostedItemComment dataComment, IEnumerable<string> currentUserRoleIDs, string currentUserID)
         {
             return new CommentDetailsViewModel()
             {
-                ArticleCommentID = dataComment.ArticleCommentID,
+                ArticleCommentID = dataComment.PostedItemCommentID,
                 AuthorName = dataComment.Author.FullName,
                 Body = dataComment.Body,
                 DateCreated = dataComment.DateCreated,
+                IsDeleteAuthorized = postedItemAuthorizer.IsPostedItemCommentDeletable(currentUserID, currentUserRoleIDs, dataComment),
+                IsEditAuthorized = postedItemAuthorizer.IsPostedItemCommentEditable(currentUserID, currentUserRoleIDs, dataComment),
             };
 
         }
@@ -116,16 +127,16 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             articleToUpdate.LastEdit = dateEdited;
         }
 
-        public EditCommentViewModel ConvertToEditCommentViewModel(ArticleComment dataComment)
+        public EditCommentViewModel ConvertToEditCommentViewModel(PostedItemComment dataComment)
         {
             return new EditCommentViewModel()
             {
                 Body = dataComment.Body,
-                CommentID = dataComment.ArticleCommentID,
+                CommentID = dataComment.PostedItemCommentID,
             };
         }
 
-        public void ConvertEditCommentViewModelToDataComent(EditCommentViewModel model, DateTime dateEdited, ArticleComment commentToUpdate)
+        public void ConvertEditCommentViewModelToDataComent(EditCommentViewModel model, DateTime dateEdited, PostedItemComment commentToUpdate)
         {
             commentToUpdate.Body = model.Body;
             commentToUpdate.LastEdit = dateEdited;
@@ -144,11 +155,11 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             };
         }
 
-        public DeleteCommentViewModel ConvertToDeleteCommentViewModel(ArticleComment dataComment)
+        public DeleteCommentViewModel ConvertToDeleteCommentViewModel(PostedItemComment dataComment)
         {
             return new DeleteCommentViewModel()
             {
-                ArticleCommentID = dataComment.ArticleCommentID,
+                ArticleCommentID = dataComment.PostedItemCommentID,
                 ArticleID = dataComment.PostedItemID,
                 AuthorName = dataComment.Author.FullName,
                 Body = dataComment.Body,

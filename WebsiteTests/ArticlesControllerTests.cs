@@ -32,7 +32,7 @@ namespace WebsiteTests
             var siteSettings = new Mock<ISiteSettings>();
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
-            modelConverter.Setup(x => x.ConvertToArticlesViewModel(It.IsAny<IEnumerable<Article>>())).Returns(new ArticlesViewModel());
+            modelConverter.Setup(x => x.ConvertToArticlesViewModel(It.IsAny<IEnumerable<Article>>()));
 
             var target = GetTarget(dbContext.Object, siteSettings.Object, modelConverter.Object, true);
 
@@ -313,7 +313,7 @@ namespace WebsiteTests
             var siteSettings = new Mock<ISiteSettings>();
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
-            modelConverter.Setup(x => x.ConvertToArticleDetailsViewModel(It.IsAny<Article>())).Returns(new ArticleDetailsViewModel());
+            modelConverter.Setup(x => x.ConvertToArticleDetailsViewModel(It.IsAny<Article>(), It.IsAny<IEnumerable<string>>(), It.IsAny<string>())).Returns(new ArticleDetailsViewModel());
 
             var target = GetTarget(dbContext.Object, siteSettings.Object, modelConverter.Object, true);
 
@@ -357,7 +357,7 @@ namespace WebsiteTests
         public void CreateCommentPost_ValidModel_ReturnsRedirect()
         {
             var articlesDbSet = new Mock<System.Data.Entity.DbSet<Article>>();
-            articlesDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(new Article() { Comments = new List<ArticleComment>() });
+            articlesDbSet.Setup(x => x.Find(It.IsAny<object[]>())).Returns(new Article() { Comments = new List<PostedItemComment>() });
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.Articles).Returns(articlesDbSet.Object);
@@ -366,7 +366,7 @@ namespace WebsiteTests
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
             int articleID = 2;
-            modelConverter.Setup(x => x.ConvertCreateCommentViewModelToDataComment(It.IsAny<CreateCommentViewModel>(), It.IsAny<User>(), It.IsAny<System.DateTime>())).Returns(new ArticleComment());
+            modelConverter.Setup(x => x.ConvertCreateCommentViewModelToDataComment(It.IsAny<CreateCommentViewModel>(), It.IsAny<User>(), It.IsAny<System.DateTime>())).Returns(new PostedItemComment());
 
             var model = new CreateCommentViewModel() { ArticleID = articleID };
 
@@ -383,8 +383,8 @@ namespace WebsiteTests
         [Fact]
         public void EditCommentGet_InvalidArticleCommentID_ReturnsHttpNotFound()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<PostedItemComment>(null);
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
@@ -403,15 +403,15 @@ namespace WebsiteTests
         [Fact]
         public void EditCommentGet_ValidArticleCommentID_ReturnsView()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<PostedItemComment>(null);
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
 
             var siteSettings = new Mock<ISiteSettings>();
             var modelConverter = new Mock<IArticleViewModelConverter>();
-            modelConverter.Setup(x => x.ConvertToEditCommentViewModel(It.IsAny<ArticleComment>())).Returns(new EditCommentViewModel());
+            modelConverter.Setup(x => x.ConvertToEditCommentViewModel(It.IsAny<PostedItemComment>())).Returns(new EditCommentViewModel());
 
             var target = GetTarget(dbContext.Object, siteSettings.Object, modelConverter.Object, true);
 
@@ -423,8 +423,8 @@ namespace WebsiteTests
         [Fact]
         public void EditCommentPost_InvalidArticleCommentID_ReturnsHttpStatusCodeBadRequest()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<PostedItemComment>(null);
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
@@ -463,8 +463,8 @@ namespace WebsiteTests
         public void EditCommentPost_ValidModel_ReturnsRedirect()
         {
             int postedItemID = 1;
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            var existingComment = new ArticleComment() { PostedItemID = postedItemID };
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            var existingComment = new PostedItemComment() { PostedItemID = postedItemID };
             articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(existingComment);
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
@@ -473,7 +473,7 @@ namespace WebsiteTests
             var siteSettings = new Mock<ISiteSettings>();
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
-            modelConverter.Setup(x => x.ConvertEditCommentViewModelToDataComent(It.IsAny<EditCommentViewModel>(), It.IsAny<System.DateTime>(), It.IsAny<ArticleComment>()));
+            modelConverter.Setup(x => x.ConvertEditCommentViewModelToDataComent(It.IsAny<EditCommentViewModel>(), It.IsAny<System.DateTime>(), It.IsAny<PostedItemComment>()));
 
             var model = new EditCommentViewModel() { CommentID = 2 };
 
@@ -489,8 +489,8 @@ namespace WebsiteTests
         [Fact]
         public void DeleteCommentGet_InvalidCommentID_ReturnsHttpNotFound()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<PostedItemComment>(null);
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
@@ -509,8 +509,8 @@ namespace WebsiteTests
         [Fact]
         public void DeleteCommentGet_ValidCommentID_ReturnsView()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new ArticleComment());
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new PostedItemComment());
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
@@ -518,7 +518,7 @@ namespace WebsiteTests
             var siteSettings = new Mock<ISiteSettings>();
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
-            modelConverter.Setup(x => x.ConvertToDeleteCommentViewModel(It.IsAny<ArticleComment>()));
+            modelConverter.Setup(x => x.ConvertToDeleteCommentViewModel(It.IsAny<PostedItemComment>()));
 
             var target = GetTarget(dbContext.Object, siteSettings.Object, modelConverter.Object, true);
 
@@ -530,8 +530,8 @@ namespace WebsiteTests
         [Fact]
         public void DeleteCommentConfirmedGet_InvalidCommentID_ReturnsHttpStatusCodeBadRequest()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<ArticleComment>(null);
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns<PostedItemComment>(null);
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);
@@ -551,8 +551,8 @@ namespace WebsiteTests
         [Fact]
         public void DeleteCommentConfirmedPost_ReturnsRedirect()
         {
-            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<ArticleComment>>();
-            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new ArticleComment());
+            var articleCommentsDbSet = new Mock<System.Data.Entity.DbSet<PostedItemComment>>();
+            articleCommentsDbSet.Setup(x => x.Find(It.IsAny<int>())).Returns(new PostedItemComment());
 
             var dbContext = TestHelper.GetMockedBrewClubDBContext();
             dbContext.Setup(x => x.ArticleComments).Returns(articleCommentsDbSet.Object);

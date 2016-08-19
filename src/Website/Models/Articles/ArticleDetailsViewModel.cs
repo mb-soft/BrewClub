@@ -27,5 +27,11 @@ namespace mbsoft.BrewClub.Website.Models.Articles
 
         [LocalizedDisplayName(LocalizedStringKeys.ArticleCommentsLabel)]
         public ICollection<CommentDetailsViewModel> Comments { get; set; } = new List<CommentDetailsViewModel>();
+
+        public bool IsEditAuthorized { get; set; }
+
+        public bool IsDeleteAuthorized { get; set; }
+
+        public bool IsCreateCommentAuthorized { get; set; }
     }
 }

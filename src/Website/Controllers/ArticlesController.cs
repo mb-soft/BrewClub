@@ -27,7 +27,8 @@ namespace mbsoft.BrewClub.Website.Controllers
         [Route("")]
         public ActionResult Articles()
         {
-            var model = articleModelConverter.ConvertToArticlesViewModel(dataContext.Articles);
+            var currentUserRoldIDs = GetCurrentUserRoleIDs();
+            var model = articleModelConverter.ConvertToArticlesViewModel(dataContext.Articles, currentUserRoldIDs);
             return View(model);
         }
         
@@ -58,6 +59,11 @@ namespace mbsoft.BrewClub.Website.Controllers
                 return View(article);
             }
         }
+
+
+
+        //http://stackoverflow.com/questions/11037213/asp-net-mvc-attribute-to-only-let-user-edit-his-her-own-content
+
 
         [HttpGet]
         [Authorize]
@@ -149,7 +155,9 @@ namespace mbsoft.BrewClub.Website.Controllers
             }
             else
             {
-                var model = articleModelConverter.ConvertToArticleDetailsViewModel(article);
+                var currentUserID = GetCurrentUserID();
+                var currentUserRoleIDs = GetCurrentUserRoleIDs();
+                var model = articleModelConverter.ConvertToArticleDetailsViewModel(article, currentUserRoleIDs, currentUserID);
                 return View(model);
             }            
         }

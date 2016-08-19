@@ -11,6 +11,7 @@ namespace mbsoft.BrewClub.Website.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Settings;
+    using Authorization;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -61,6 +62,7 @@ namespace mbsoft.BrewClub.Website.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IPostedItemAuthorizer>().To<PostedItemAuthorizer>();
             kernel.Bind<Models.Articles.IArticleViewModelConverter>().To<Models.Articles.ArticleViewModelConverter>();
             kernel.Bind<IUserContext>().To<UserContext>();
             kernel.Bind<ISiteSettings>().ToMethod(x => SiteSettings.GetInstance());

@@ -60,8 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\IAuthorizableComment.cs" />
+    <Compile Include="Authorization\IAuthorizablePostedItem.cs" />
     <Compile Include="Data\Article.cs" />
-    <Compile Include="Data\ArticleComment.cs" />
+    <Compile Include="Data\PostedItemComment.cs" />
     <Compile Include="Data\BrewClubDbContext.cs" />
     <Compile Include="Data\BrewClubTestingInitializer.cs" />
     <Compile Include="Data\BrewClubUserManager.cs" />
@@ -75,12 +77,14 @@
     <Compile Include="Data\User.cs" />
     <Compile Include="Exceptions\LoginRequiredException.cs" />
     <Compile Include="Exceptions\NotAuthorizedException.cs" />
+    <Compile Include="Authorization\IPostedItemAuthorizer.cs" />
     <Compile Include="Localization\IStringLocalizer.cs" />
     <Compile Include="Localization\MissingLocalizedStringException.cs" />
     <Compile Include="Localization\Xml\Language.cs" />
     <Compile Include="Localization\Xml\Word.cs" />
     <Compile Include="Localization\Xml\XmlStringLocalizer.cs" />
     <Compile Include="Models\ViewErrorModel.cs" />
+    <Compile Include="Authorization\PostedItemAuthorizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

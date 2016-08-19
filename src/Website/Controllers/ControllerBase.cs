@@ -117,6 +117,32 @@ namespace mbsoft.BrewClub.Website.Controllers
 			}
 		}
 
+        protected string GetCurrentUserID()
+        {
+            var currentUser = GetCurrentUser();
+            if (currentUser == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return currentUser.Id;
+            }
+        }
+
+        protected IEnumerable<string> GetCurrentUserRoleIDs()
+        {
+            var currentUser = GetCurrentUser();
+            if (currentUser == null)
+            {
+                return new List<string>();
+            }
+            else
+            {
+                return (from role in currentUser.Roles select role.RoleId);
+            }
+        }
+
 		protected ISiteLocalizer GetLocalizer()
 		{
             return new SiteLocalizerFactory().GetXmlStringSiteLocalizer(siteSettings.Language.BaseCultureCode, siteSettings.Language.LanguageFilesDirectory);

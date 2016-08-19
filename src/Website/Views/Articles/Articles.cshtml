@@ -7,7 +7,10 @@
 }
 
 <div>
-    <a href="@Url.Action("create")" class="btn btn-success" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleCreateArticleLinkText)</a>
+    @if (Model.IsCreateArticleAuthorized)
+    {
+        <a href="@Url.Action("create")" class="btn btn-success" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleCreateArticleLinkText)</a>
+    }
 </div>
 
 <p></p>

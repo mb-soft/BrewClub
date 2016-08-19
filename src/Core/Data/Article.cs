@@ -12,7 +12,7 @@ namespace mbsoft.BrewClub.Data
         [Required]
         public string Body { get; set; }
 
-        public virtual ICollection<ArticleComment> Comments { get; set; }
+        public virtual ICollection<PostedItemComment> Comments { get; set; }
 
 	}
 }

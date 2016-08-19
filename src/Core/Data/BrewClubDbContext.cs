@@ -27,7 +27,7 @@ namespace mbsoft.BrewClub.Data
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Classified> Classifieds { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
-        public virtual DbSet<ArticleComment> ArticleComments { get; set; }
+        public virtual DbSet<PostedItemComment> ArticleComments { get; set; }
 		
     }
 
