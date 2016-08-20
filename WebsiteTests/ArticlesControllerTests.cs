@@ -32,7 +32,7 @@ namespace WebsiteTests
             var siteSettings = new Mock<ISiteSettings>();
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
-            modelConverter.Setup(x => x.ConvertToArticlesViewModel(It.IsAny<IEnumerable<Article>>()));
+            modelConverter.Setup(x => x.ConvertToArticlesViewModel(It.IsAny<IEnumerable<Article>>(), It.IsAny<IEnumerable<string>>()));
 
             var target = GetTarget(dbContext.Object, siteSettings.Object, modelConverter.Object, true);
 
