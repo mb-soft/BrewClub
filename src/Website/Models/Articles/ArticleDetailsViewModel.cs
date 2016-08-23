@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using mbsoft.BrewClub.Data;
+using mbsoft.BrewClub.Website.Models.Shared;
 
 namespace mbsoft.BrewClub.Website.Models.Articles
 {

@@ -9,6 +9,7 @@ using Xunit;
 using System.Collections.Generic;
 using System.Net;
 using System;
+using mbsoft.BrewClub.Authorization;
 
 namespace WebsiteTests
 {
@@ -16,7 +17,9 @@ namespace WebsiteTests
     {        
         private ArticlesController GetTarget(BrewClubDbContext dbContext, ISiteSettings siteSettings, IArticleViewModelConverter modelConverter, bool isUserLoggedIn)
         {
-            var target = new ArticlesController(dbContext, siteSettings, modelConverter);
+            var postedItemAuthorizer = new PostedItemAuthorizer();
+
+            var target = new ArticlesController(dbContext, siteSettings, modelConverter, postedItemAuthorizer);
             TestHelper.InitializeMockedHttpContext(isUserLoggedIn, target);
 
             return target;
@@ -33,7 +36,7 @@ namespace WebsiteTests
 
             var modelConverter = new Mock<IArticleViewModelConverter>();
             modelConverter.Setup(x => x.ConvertToArticlesViewModel(It.IsAny<IEnumerable<Article>>(), It.IsAny<IEnumerable<string>>()));
-
+            
             var target = GetTarget(dbContext.Object, siteSettings.Object, modelConverter.Object, true);
 
             var actual = target.Articles();

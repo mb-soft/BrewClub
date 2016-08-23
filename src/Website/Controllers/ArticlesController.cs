@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using mbsoft.BrewClub.Data;
 using mbsoft.BrewClub.Website.Models.Articles;
 using mbsoft.BrewClub.Website.Settings;
+using mbsoft.BrewClub.Authorization;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
@@ -18,10 +19,14 @@ namespace mbsoft.BrewClub.Website.Controllers
     {
         private IArticleViewModelConverter articleModelConverter;
 
-        public ArticlesController(BrewClubDbContext dataContext, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter)
+        //http://stackoverflow.com/questions/11037213/asp-net-mvc-attribute-to-only-let-user-edit-his-her-own-content
+        private IPostedItemAuthorizer postedItemAuthorizer;
+
+        public ArticlesController(BrewClubDbContext dataContext, ISiteSettings siteSettings, IArticleViewModelConverter articleModelConverter, IPostedItemAuthorizer postedItemAuthorizer)
 			: base(dataContext, siteSettings)
 		{
             this.articleModelConverter = articleModelConverter;
+            this.postedItemAuthorizer = postedItemAuthorizer;
         }
 
         [Route("")]
@@ -60,11 +65,6 @@ namespace mbsoft.BrewClub.Website.Controllers
             }
         }
 
-
-
-        //http://stackoverflow.com/questions/11037213/asp-net-mvc-attribute-to-only-let-user-edit-his-her-own-content
-
-
         [HttpGet]
         [Authorize]
         public ActionResult Edit(int articleID)
@@ -96,10 +96,19 @@ namespace mbsoft.BrewClub.Website.Controllers
                 }
                 else
                 {
-                    articleModelConverter.ConvertArticleEditViewModelToDataArticle(article, DateTime.Now, existingArticle);
-                    dataContext.SaveChanges();
+                    var currentUserID = GetCurrentUserID();
+                    var currentUserRoleIDs = GetCurrentUserRoleIDs();
+                    if (postedItemAuthorizer.IsPostedItemEditable(currentUserID, currentUserRoleIDs, existingArticle))
+                    {
+                        articleModelConverter.ConvertArticleEditViewModelToDataArticle(article, DateTime.Now, existingArticle);
+                        dataContext.SaveChanges();
 
-                    return RedirectToAction("details", new { articleID = article.ArticleID });
+                        return RedirectToAction("details", new { articleID = article.ArticleID });
+                    }
+                    else
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    }
                 }
             }
             else
@@ -137,10 +146,19 @@ namespace mbsoft.BrewClub.Website.Controllers
             }
             else
             {
-                dataContext.Articles.Remove(existingArticle);
-                dataContext.SaveChanges();
+                var currentUserID = GetCurrentUserID();
+                var currentUserRoleIDs = GetCurrentUserRoleIDs();
+                if (postedItemAuthorizer.IsPostedItemDeletable(currentUserID, currentUserRoleIDs, existingArticle))
+                {
+                    dataContext.Articles.Remove(existingArticle);
+                    dataContext.SaveChanges();
 
-                return RedirectToAction("articles");
+                    return RedirectToAction("articles");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
             }
         }
 
@@ -222,10 +240,19 @@ namespace mbsoft.BrewClub.Website.Controllers
                 }
                 else
                 {
-                    articleModelConverter.ConvertEditCommentViewModelToDataComent(comment, DateTime.Now, existingComment);
-                    dataContext.SaveChanges(); 
+                    var currentUserID = GetCurrentUserID();
+                    var currentUserRoleIDs = GetCurrentUserRoleIDs();
+                    if (postedItemAuthorizer.IsPostedItemCommentEditable(currentUserID, currentUserRoleIDs, existingComment))
+                    {
+                        articleModelConverter.ConvertEditCommentViewModelToDataComent(comment, DateTime.Now, existingComment);
+                        dataContext.SaveChanges();
 
-                    return RedirectToAction("details", new { articleID = existingComment.PostedItemID });
+                        return RedirectToAction("details", new { articleID = existingComment.PostedItemID });
+                    }
+                    else
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    }
                 }
             }
             else
@@ -263,10 +290,20 @@ namespace mbsoft.BrewClub.Website.Controllers
             }
             else
             {
-                dataContext.ArticleComments.Remove(existingComment);
-                dataContext.SaveChanges();
+                var currentUserID = GetCurrentUserID();
+                var currentUserRoleIDs = GetCurrentUserRoleIDs();
+                if (postedItemAuthorizer.IsPostedItemCommentDeletable(currentUserID, currentUserRoleIDs, existingComment))
+                {
+                    dataContext.ArticleComments.Remove(existingComment);
+                    dataContext.SaveChanges();
 
-                return RedirectToAction("details", new { articleID = articleID });
+                    return RedirectToAction("details", new { articleID = articleID });
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+
             }
         }
 
