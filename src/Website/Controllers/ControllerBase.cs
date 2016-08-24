@@ -19,26 +19,17 @@ namespace mbsoft.BrewClub.Website.Controllers
 	{
 
 		private DateTime requestStart;
-		private IUserContext context;
-		private ISiteSettings siteSettings;
+        protected BrewClubDbContext dataContext { get; }
+         protected ISiteSettings siteSettings { get; }
 
-		public ControllerBase(IUserContext context, ISiteSettings siteSettings)
+
+		public ControllerBase(BrewClubDbContext dataContext, ISiteSettings siteSettings)
 		{
 			requestStart = DateTime.Now;
-			this.context = context;
+            this.dataContext = dataContext;
 			this.siteSettings = siteSettings;
 		}
 
-
-		protected static IUserContext GetDefaultUserContext()
-		{
-			return new UserContext();
-		}
-
-		protected static ISiteSettings GetDefaultSiteSettings()
-		{
-			return SiteSettings.GetInstance();
-		}
 
 		protected override void OnActionExecuted(ActionExecutedContext filterContext)
 		{
@@ -102,12 +93,6 @@ namespace mbsoft.BrewClub.Website.Controllers
 		}
 
 
-
-		protected static BrewClubDbContext GetDbContext()
-		{
-			return new BrewClubDbContext();
-		}
-
 		//protected void SetUserState(UserState state)
 		//{
 		//	context.SetUserState(state);
@@ -124,7 +109,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 		{
 			if (User.Identity.IsAuthenticated)
 			{
-				return GetDbContext().Users.First(u => u.UserName == User.Identity.Name);
+				return dataContext.Users.First(u => u.UserName == User.Identity.Name);
 			}
 			else
 			{
@@ -132,14 +117,35 @@ namespace mbsoft.BrewClub.Website.Controllers
 			}
 		}
 
-		protected SiteLocalizer GetLocalizer()
+        protected string GetCurrentUserID()
+        {
+            var currentUser = GetCurrentUser();
+            if (currentUser == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return currentUser.Id;
+            }
+        }
+
+        protected IEnumerable<string> GetCurrentUserRoleIDs()
+        {
+            var currentUser = GetCurrentUser();
+            if (currentUser == null)
+            {
+                return new List<string>();
+            }
+            else
+            {
+                return (from role in currentUser.Roles select role.RoleId);
+            }
+        }
+
+		protected ISiteLocalizer GetLocalizer()
 		{
-			// todo: tie this to a cache dependency to avoid unnecessary reloads, but still get updated when the file changes.
-			var underlyingLocalizer = XmlStringLocalizer.Create(siteSettings.Language.BaseCultureCode, siteSettings.Language.LanguageFilesDirectory);
-
-			var localizer = new SiteLocalizer(siteSettings.Language.BaseCultureCode, underlyingLocalizer);
-
-			return localizer;
+            return new SiteLocalizerFactory().GetXmlStringSiteLocalizer(siteSettings.Language.BaseCultureCode, siteSettings.Language.LanguageFilesDirectory);
 		}
 
 		private void ReturnString(string s, int i)

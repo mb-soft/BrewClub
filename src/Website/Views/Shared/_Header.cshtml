@@ -25,7 +25,7 @@
 					<li><a href="#">@Localizer.Localize("Post")</a></li>
 					<li><a href="@Url.Action("Logout", "Account")">@Localizer.Localize("Logout")</a></li>
 				}
-				<li><a href="@mbsoft.BrewClub.Website.Controllers.ContactController.ContactRouteUrl">@Localizer.Localize(LocalizedStringKeys.ContactTitle)</a></li>
+				<li><a href="/contact">@Localizer.Localize(LocalizedStringKeys.ContactTitle)</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 		<div id="navbar2" class="">
@@ -33,7 +33,7 @@
 				<li class="active"><a href="@Url.Action("Index", "Home")">@Localizer.Localize("Home")</a></li>
 				<li><a href="#">@Localizer.Localize("Recipes")</a></li>
 				<li><a href="#">@Localizer.Localize("Buy and Sell")</a></li>
-				<li><a href="#">@Localizer.Localize("Member Posts")</a></li>
+				<li><a href="/articles">@Localizer.Localize(LocalizedStringKeys.ArticlesTitle)</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>

@@ -8,7 +8,7 @@ namespace mbsoft.BrewClub.Data
 {
 	public class ClassifiedAnswer
 	{
-		public int ClassifiedAnswerId { get; set; }
+		public int ClassifiedAnswerID { get; set; }
 
 		public User Author { get; set; }
 

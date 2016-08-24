@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AttributeRouting.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace mbsoft.BrewClub.Website.Controllers
 {
-	public class HomeController : ControllerBase
+
+    public class HomeController : ControllerBase
 	{
 
-		public HomeController()
-			: base(GetDefaultUserContext(), GetDefaultSiteSettings())
-		{
+		public HomeController(Data.BrewClubDbContext dataContext, Settings.ISiteSettings siteSettings)
+            : base(dataContext, siteSettings)
+        {
 
 		}
-		
-		[GET("")]
-		public ActionResult Index()
+
+
+        [Route("index")]
+        [Route("")]
+        public ActionResult Index()
 		{
 			return View();
 		}

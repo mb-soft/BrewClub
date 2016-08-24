@@ -8,7 +8,7 @@ namespace mbsoft.BrewClub.Data
 {
 	public class RecipeReview
 	{
-		public int RecipeReviewId { get; set; }
+		public int RecipeReviewID { get; set; }
 
 		public User Author { get; set; }
 

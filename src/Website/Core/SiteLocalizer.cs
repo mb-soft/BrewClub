@@ -6,8 +6,10 @@ using mbsoft.BrewClub.Localization;
 
 namespace mbsoft.BrewClub.Website
 {
-	public class SiteLocalizer 
-	{
+
+	public class SiteLocalizer : ISiteLocalizer
+    {
+
 
 		private IStringLocalizer underlyingLocalizer;
 		private string baseCultureCode;

@@ -1,0 +1,82 @@
+﻿@model mbsoft.BrewClub.Website.Models.Articles.ArticleDetailsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    PageTitle = Localizer.Localize(LocalizedStringKeys.ArticlesTitle);
+}
+
+<article>
+    <section>       
+        <div class="panel panel-primary panel-posted-item">
+            <div class="panel-heading panel-posted-item-heading">
+                <h3 class="panel-title posted-item-title">
+                    @if (string.IsNullOrEmpty(Model.Url) == false)
+                    {
+                        <a href="@Model.Url">@Html.DisplayFor(model => model.Title)</a>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Title)
+                    }                    
+                </h3>
+            </div>
+
+            <div class="panel-body posted-item-body">
+                <p>@Html.DisplayFor(model => model.Body)</p>
+            </div>
+
+            <div class="panel-footer panel-posted-item-footer">
+                <p class="label label-info label-pill label-posted-item-detail">@Model.AuthorName </p>
+                <p class="label label-info label-pill label-posted-item-detail">@Model.DateCreated.ToString() </p>
+                <p></p>
+                <div class="btn-group btn-group-sm">
+                    @if (Model.IsEditAuthorized)
+                    {
+                        <a href="@Url.Action("edit", new { articleID = Model.ArticleID })" type="button" class="btn btn-success btn-postd-item-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditLinkText)</a>
+                    }
+                    @if (Model.IsDeleteAuthorized)
+                    {
+                        <a href="@Url.Action("delete", new { articleID = Model.ArticleID })" type="button" class="btn btn-warning btn-posted-item-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteLinkText)</a>
+                    }
+                </div>
+            </div>
+        </div>       
+    </section>
+
+    <section>
+        <div>
+            @if (Model.IsCreateCommentAuthorized)
+            {
+                <a href="@Url.Action("CreateComment", new { articleID = Model.ArticleID })" class="btn btn-success" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleCreateCommentLinkText)</a>
+            }
+        </div>
+        <p></p>
+        
+        <div class="posted-item-comment-list">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="panel panel-info panel-posted-item-comment">
+                    <div class="panel-body posted-item-comment-body">
+                        <p>@Html.DisplayFor(model => comment.Body)</p>
+                    </div>
+
+                    <div class="panel-footer panel-posted-item-comment-footer">
+                        <p class="label label-info label-pill label-posted-item-comment-detail">@comment.AuthorName </p>
+                        <p class="label label-info label-pill label-posted-item-comment-detail">@comment.DateCreated.ToString() </p>
+                        <p></p>
+                        <div class="btn-group btn-group-sm">
+                            @if (comment.IsEditAuthorized)
+                            {
+                                <a href="@Url.Action("EditComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-success btn-postd-item-comment-edit" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleEditCommentLinkText)</a>
+                            }
+                            @if (comment.IsDeleteAuthorized)
+                            {
+                                <a href="@Url.Action("DeleteComment", new { commentID = comment.ArticleCommentID })" type="button" class="btn btn-warning btn-posted-item-comment-delete" role="button">@Localizer.Localize(LocalizedStringKeys.ArticleDeleteCommentLinkText)</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</article>

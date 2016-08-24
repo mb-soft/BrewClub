@@ -16,17 +16,10 @@ namespace mbsoft.BrewClub.Website.Controllers
 {
 	public class AccountController : ControllerBase
 	{
-
 		private BrewClubUserManager userManager;
 
-		public AccountController()
-			: this(GetDefaultUserContext(), GetDefaultSiteSettings(), BrewClubUserManager.Create(GetDbContext()))
-		{
-
-		}
-
-		public AccountController(IUserContext userContext, ISiteSettings siteSettings, BrewClubUserManager userManager)
-			: base(userContext, siteSettings)
+		public AccountController(Data.BrewClubDbContext dataContext, ISiteSettings siteSettings, BrewClubUserManager userManager)
+			: base(dataContext, siteSettings)
 		{
 			this.userManager = userManager;
 		}
@@ -108,7 +101,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 				return View("_Register", model);
 			}
 			
-			var foundByEmail = GetDbContext().Users.FirstOrDefault(u => u.Email.Equals(model.EmailAddress, StringComparison.InvariantCultureIgnoreCase));
+			var foundByEmail = dataContext.Users.FirstOrDefault(u => u.Email.Equals(model.EmailAddress, StringComparison.InvariantCultureIgnoreCase));
 
 			if (foundByEmail != null)
 			{
@@ -116,7 +109,7 @@ namespace mbsoft.BrewClub.Website.Controllers
 				return View("_Register", model);
 			}
 
-			var foundByUsername = GetDbContext().Users.FirstOrDefault(u => u.UserName.Equals(model.UserName, StringComparison.InvariantCultureIgnoreCase));
+			var foundByUsername = dataContext.Users.FirstOrDefault(u => u.UserName.Equals(model.UserName, StringComparison.InvariantCultureIgnoreCase));
 
 			if (foundByUsername != null)
 			{
