@@ -12,5 +12,8 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         [LocalizedDisplayName(LocalizedStringKeys.ArticleBodyLabel)]
         [DataType(DataType.MultilineText)]
         public string Body { get; set; }
+
+        [LocalizedDisplayName(LocalizedStringKeys.ArticleUrlLabel)]
+        public string Url { get; set; }
     }
 }

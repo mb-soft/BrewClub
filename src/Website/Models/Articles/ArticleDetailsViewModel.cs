@@ -20,6 +20,9 @@ namespace mbsoft.BrewClub.Website.Models.Articles
         [DataType(DataType.MultilineText)]
         public string Body { get; set; }
 
+        [LocalizedDisplayName(LocalizedStringKeys.ArticleUrlLabel)]
+        public string Url { get; set; }
+
         [LocalizedDisplayName(LocalizedStringKeys.ArticleDateCreatedLabel)]
         public DateTime DateCreated { get; set; }
 

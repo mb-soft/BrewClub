@@ -53,6 +53,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
                 Body = model.Body,
                 DateCreated = dateCreated,
                 Title = model.Title,
+                Url = model.Url,
             };
         }
 
@@ -80,6 +81,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
                 IsDeleteAuthorized = postedItemAuthorizer.IsPostedItemDeletable(currentUserID, currentUserRoleIDs, dataArticle),
                 IsEditAuthorized = postedItemAuthorizer.IsPostedItemEditable(currentUserID, currentUserRoleIDs, dataArticle),
                 IsCreateCommentAuthorized = postedItemAuthorizer.IsAllowedToCreatPostComment(currentUserRoleIDs),
+                Url = dataArticle.Url,
             };
         }
 
@@ -116,6 +118,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
                 ArticleID = dataArticle.PostedItemID,
                 Body = dataArticle.Body,
                 Title = dataArticle.Title,
+                Url = dataArticle.Url,
             };
         }
 
@@ -125,6 +128,7 @@ namespace mbsoft.BrewClub.Website.Models.Articles
             articleToUpdate.Title = model.Title;
             articleToUpdate.PostedItemID = model.ArticleID;
             articleToUpdate.LastEdit = dateEdited;
+            articleToUpdate.Url = model.Url;
         }
 
         public EditCommentViewModel ConvertToEditCommentViewModel(PostedItemComment dataComment)

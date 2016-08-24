@@ -20,6 +20,7 @@ namespace mbsoft.BrewClub.Website
         //Articles
         public const string ArticleTitleLabel = "ArticleTitleLabel";
         public const string ArticleBodyLabel = "ArticleBodyLabel";
+        public const string ArticleUrlLabel = "ArticleUrlLabel";
         public const string ArticleDateCreatedLabel = "ArticleDateCreatedLabel";
         public const string ArticleDateLastEditedLabel = "ArticleDateLastEditedLabel";
         public const string ArticleCommentsLabel = "ArticleCommentsLabel";

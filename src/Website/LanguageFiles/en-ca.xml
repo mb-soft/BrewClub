@@ -33,6 +33,7 @@
   <!-- Articles -->
   <word key="ArticleTitleLabel" value="Title" />
   <word key="ArticleBodyLabel" value="Body" />
+  <word key="ArticleUrlLabel" value="Link" />
   <word key="ArticleDateCreatedLabel" value="Posted" />
   <word key="ArticleDateLastEditedLabel" value="Edited" />
   <word key="ArticleCommentsLabel" value="Comments" />  

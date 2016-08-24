@@ -10,7 +10,14 @@
         <div class="panel panel-primary panel-posted-item">
             <div class="panel-heading panel-posted-item-heading">
                 <h3 class="panel-title posted-item-title">
-                    @Html.DisplayFor(model => model.Title)
+                    @if (string.IsNullOrEmpty(Model.Url) == false)
+                    {
+                        <a href="@Model.Url">@Html.DisplayFor(model => model.Title)</a>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Title)
+                    }                    
                 </h3>
             </div>
 
